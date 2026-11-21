@@ -93,5 +93,5 @@ npm test         # 檢查碼與完整流程測試
 
 - Apps Script 回應會先 302 轉址，綠界可能讀不到 `1|OK` 而重送通知。寫入已在第一次完成，重送不影響資料；若綠界後台持續顯示通知失敗，可在前面加一個 Cloudflare Worker 代為回 `1|OK`。
 - `ecpayResult` 的自動跳轉頁在 Apps Script 沙盒中執行，若瀏覽器擋下自動跳轉，頁面上有「查看訂單」按鈕。
-- ATM 繳費期限 1 天（`atmExpireDays`）；超商代碼／條碼使用綠界預設 7 天。
+- ATM 繳費期限 1 天（`atmExpireDays`）；超商代碼 1 天（`cvsExpireMinutes` = 1440 分鐘）。超商條碼已關閉（`ignorePayment`），因為它和超商代碼共用 `StoreExpireDate`，單位卻是天，無法同時設成 1 天。
 - 超過繳費期限仍未付款的訂單會一直是「付款中」，需要的話可另外加排程標記逾期。

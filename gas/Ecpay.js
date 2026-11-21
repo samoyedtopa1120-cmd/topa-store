@@ -77,10 +77,13 @@ function ecpayBuildAioParams_(order, cfg, webAppUrl) {
     ClientBackURL: order.thanksUrl,
     ChoosePayment: 'ALL',
     ExpireDate: String(order.campaign.atmExpireDays || 3),
+    // 超商代碼以「分鐘」計；超商條碼共用此參數但以「天」計，因此條碼要在 IgnorePayment 關掉
+    StoreExpireDate: String(order.campaign.cvsExpireMinutes || 10080),
     NeedExtraPaidInfo: 'N',
     EncryptType: '1',
     CustomField1: order.campaignId
   };
+  if (order.campaign.ignorePayment) params.IgnorePayment = order.campaign.ignorePayment;
   params.CheckMacValue = ecpayCheckMac_(params, cfg.hashKey, cfg.hashIV);
   return params;
 }

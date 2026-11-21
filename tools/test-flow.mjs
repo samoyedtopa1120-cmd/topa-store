@@ -41,6 +41,9 @@ assert.equal(r1.amount, 1120 + 650 * 2 + 60);
 assert.equal(r1.orderNo.length, 20);
 assert.equal(r1.ecpay.params.TotalAmount, '2480');
 assert.equal(r1.ecpay.params.ReturnURL, WEBAPP + '?action=ecpayNotify');
+assert.equal(r1.ecpay.params.ExpireDate, '1');          // ATM 1 天
+assert.equal(r1.ecpay.params.StoreExpireDate, '1440');  // 超商代碼 1 天（分鐘）
+assert.equal(r1.ecpay.params.IgnorePayment, 'BARCODE'); // 不提供超商條碼
 assert.equal(r1.ecpay.params.ClientBackURL,
   `https://someone.github.io/topa-store/2026Birthday/thanks.html?o=${r1.orderNo}&t=${r1.token}`);
 assert.ok(ctx.ecpayVerify_(r1.ecpay.params, KEY));

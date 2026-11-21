@@ -12,7 +12,9 @@ var CAMPAIGNS = {
     deadline: '2026-11-22T23:59:59+08:00',
     maxQtyPerItem: 10,
     pickupMethods: ['7-11店到店', '全家店到店'],
-    atmExpireDays: 1,                  // ATM 虛擬帳號繳費期限（天）
+    atmExpireDays: 1,                  // ATM 虛擬帳號繳費期限（天，綠界最短 1）
+    cvsExpireMinutes: 1440,            // 超商代碼繳費期限（分鐘）= 1 天
+    ignorePayment: 'BARCODE',          // 綠界付款頁隱藏的付款方式（# 分隔）；條碼的期限單位是天，與代碼共用參數會衝突
     // 付款方式：'donate' = 導到綠界實況主贊助頁，客戶自行輸入金額並在留言貼訂單編號，人工對帳
     //           'aio'    = 綠界全方位金流 API，自動回寫付款結果（需特約商店金鑰）
     paymentMode: 'aio',
