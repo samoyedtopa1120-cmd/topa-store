@@ -40,18 +40,19 @@
     </div>
 
     <form id="order" novalidate>
+      <p class="req-note"><span class="req">*</span> 為必填</p>
       <section class="section">
         <h2><span class="num">01</span>你是誰？</h2>
         <p class="hint">請提供多帕認得出來的 ID</p>
         <div class="field">
-          <label for="nickname">暱稱 / ID</label>
+          <label for="nickname">暱稱 / ID<span class="req" aria-hidden="true">*</span></label>
           <input id="nickname" name="nickname" type="text" maxlength="50" autocomplete="nickname" required>
           <span class="err">請填寫暱稱或 ID</span>
         </div>
       </section>
 
       <section class="section">
-        <h2><span class="num">02</span>選購商品</h2>
+        <h2><span class="num">02</span>選購商品<span class="req" aria-hidden="true">*</span></h2>
         <p class="hint">商品圖面：本次生日主視覺（直播封面）</p>
         <div id="products" class="products"></div>
         <p id="items-err" class="alert" hidden>請至少選擇一項商品</p>
@@ -61,22 +62,22 @@
         <h2><span class="num">03</span>取貨資訊</h2>
         <p class="hint">一律超商店到店，運費固定 NT$60</p>
         <div class="field">
-          <label>取貨方式</label>
+          <label>取貨方式<span class="req" aria-hidden="true">*</span></label>
           <div class="chips" id="pickup"></div>
         </div>
         <div class="field">
-          <label for="name">收件人姓名<span class="opt">請填本名，取貨時需核對證件</span></label>
+          <label for="name">收件人姓名<span class="req" aria-hidden="true">*</span><span class="opt">請填本名，取貨時需核對證件</span></label>
           <input id="name" name="name" type="text" maxlength="30" autocomplete="name" required>
           <span class="err">請填寫收件人本名</span>
         </div>
         <div class="field">
-          <label for="phone">手機號碼</label>
+          <label for="phone">手機號碼<span class="req" aria-hidden="true">*</span></label>
           <input id="phone" name="phone" type="tel" inputmode="numeric" maxlength="12" autocomplete="tel" placeholder="0912345678" required>
           <span class="err">請填寫 09 開頭的 10 碼手機號碼</span>
         </div>
         <div class="row2">
           <div class="field">
-            <label for="storeName">取貨門市名稱</label>
+            <label for="storeName">取貨門市名稱<span class="req" aria-hidden="true">*</span></label>
             <input id="storeName" name="storeName" type="text" maxlength="50" placeholder="例：鑫台北門市" required>
             <span class="err">請填寫門市名稱</span>
           </div>
@@ -88,8 +89,8 @@
         </div>
         <div class="field">
           <label for="email">Email<span class="opt">選填，方便聯絡出貨問題</span></label>
-          <input id="email" name="email" type="email" maxlength="100" autocomplete="email">
-          <span class="err">Email 格式不正確</span>
+          <input id="email" name="email" type="email" maxlength="100" autocomplete="email" placeholder="例：topa@example.com">
+          <span class="err">Email 格式不正確，例：topa@example.com</span>
         </div>
       </section>
 
@@ -101,8 +102,8 @@
           <li>商品尺寸可能因為印製有些微誤差。</li>
         </ol>
         <label class="agree" id="agree-box">
-          <input type="checkbox" id="agree" name="agree">
-          <span>同意啦哪次不同意！（已閱讀並接受以上內容）</span>
+          <input type="checkbox" id="agree" name="agree" required>
+          <span>同意啦哪次不同意！（已閱讀並接受以上內容）<span class="req" aria-hidden="true">*</span></span>
         </label>
       </section>
 

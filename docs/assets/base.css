@@ -98,6 +98,9 @@ a { color: var(--accent); }
 
 .field { margin: 14px 0 0; }
 .field label { display: block; font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+.req { color: var(--err); font-weight: 800; margin-left: 3px; }
+.section h2 .req { align-self: flex-start; font-size: 18px; }
+.req-note { margin: 16px 4px -4px; text-align: right; font-size: 13px; color: var(--ink-soft); }
 .field label .opt { font-weight: 400; color: var(--ink-soft); font-size: 13px; margin-left: 4px; }
 .field .sub { display: block; color: var(--ink-soft); font-size: 13px; margin-top: 4px; }
 input[type="text"], input[type="tel"], input[type="email"] {
