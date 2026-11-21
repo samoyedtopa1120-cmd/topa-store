@@ -14,18 +14,20 @@ const signed = (p) => {
   params.CheckMacValue = ctx.ecpayCheckMac_(params, KEY.hashKey, KEY.hashIV);
   return new URLSearchParams(params).toString();
 };
-const orderSheet = (id = '2026Birthday') => sheets.get('訂單_' + id);
+const orderSheet = () => sheets.get('訂單');
 const row = (no, id) => ctx.readObject_(orderSheet(id), ctx.findRow_(orderSheet(id), no));
 const setCell = (no, col, v, id) => ctx.updateObject_(orderSheet(id), ctx.findRow_(orderSheet(id), no), { [col]: v });
 const status = (no, t, id = '2026Birthday') => get({ action: 'orderStatus', campaign: id, o: no, t });
 
 // 0. 第一次請求就自動建立所有工作表（不用手動 setup）
 const health = get({});
-assert.equal(health.schema, '2');
-for (const n of ['活動設定', '運送方式', '綠界通知紀錄', '訂單_2026Birthday', '商品_2026Birthday']) assert.ok(sheets.get(n), n);
+assert.equal(health.schema, '3');
+for (const n of ['活動設定', '運送方式', '綠界通知紀錄', '訂單', '商品']) assert.ok(sheets.get(n), n);
+assert.deepEqual([...sheets.keys()].filter((n) => n.includes('_')), []); // 分頁名稱不含活動代碼
 assert.equal(sheets.get('活動設定').rows.length, 2);
 assert.equal(sheets.get('運送方式').rows.length, 3);
-assert.equal(sheets.get('商品_2026Birthday').rows.length, 4);
+assert.equal(sheets.get('商品').rows.length, 4);
+assert.equal(sheets.get('商品').rows[1][0], '2026Birthday');
 console.log('✓ schema auto-created');
 
 // 1. 活動公開資訊
@@ -202,10 +204,13 @@ for (const [n, ty, fee, sort] of [['宅配', '宅配', 120, 1], ['面交', '面�
 }
 const i2 = get({ action: 'campaign', campaign: 'Test2027' });
 assert.equal(i2.ok, true); assert.deepEqual(i2.products, []);
-assert.ok(sheets.get('商品_Test2027'));
 assert.deepEqual(i2.shipping.map((m) => m.name), ['宅配', '面交', '電子檔']);
-sheets.get('商品_Test2027').appendRow(['A', '小卡', '', 300, true, 1]);
-sheets.get('商品_Test2027').appendRow(['B', '下架品', '', 1, false, 2]);
+const prod = (o) => ctx.appendObject_(sheets.get('商品'), { '活動代碼': 'Test2027', ...o });
+prod({ '商品代碼': 'A', '商品名稱': '小卡', '單價': 300, '上架': true, '排序': 1 });
+prod({ '商品代碼': 'B', '商品名稱': '下架品', '單價': 1, '上架': false, '排序': 2 });
+prod({ '商品代碼': 'ACRYLIC', '商品名稱': '別的活動同代碼', '單價': 9, '上架': true, '排序': 3 });
+assert.deepEqual(get({ action: 'campaign', campaign: 'Test2027' }).products.map((p) => p.sku), ['A', 'ACRYLIC']);
+assert.equal(get({ action: 'campaign', campaign: '2026Birthday' }).products.find((p) => p.sku === 'ACRYLIC').price, 650);
 const t = { ...base, campaign: 'Test2027', items: [{ sku: 'A', qty: 1 }], thanksUrl: 'https://someone.github.io/topa-store/Test2027/thanks.html' };
 assert.equal(createOrder({ ...t, shipping: { method: '宅配' } }).code, 'INVALID'); // 缺地址
 const h1 = createOrder({ ...t, shipping: { method: '宅配', address: '台北市信義區市府路1號' }, note: '請小心包裝',
@@ -225,6 +230,8 @@ const e1 = createOrder({ ...t, buyer: { nickname: '只填暱稱' }, shipping: { 
 assert.equal(e1.ok, true, JSON.stringify(e1));
 assert.equal(e1.ecpay.params.ItemName, '小卡 NT$300 x 1'); // 免運費時不列運費
 assert.equal(status(h1.orderNo, h1.token, 'Test2027').pickup, '宅配');
+assert.equal(status(h1.orderNo, h1.token, '2026Birthday').ok, false); // 活動不符查不到
+assert.equal(row(h1.orderNo)['活動'], 'Test2027');
 console.log('✓ new campaign from sheet only (home / meetup / none, free shipping, extra answers)');
 
 // 14. 贊助頁模式：建單不產生綠界參數，客戶回報付款只記時間；不會被標逾期
@@ -250,10 +257,36 @@ console.log('✓ bad prefix rejected');
 // 16. 舊工作表缺欄位時，結構版本提升後會自動補上
 const old = orderSheet();
 old.rows[0] = old.rows[0].filter((h) => h !== '管理備註' && h !== '自訂欄位');
-ctx.PropertiesService.getScriptProperties().setProperty('SCHEMA_VERSION', '1');
+ctx.PropertiesService.getScriptProperties().setProperty('SCHEMA_VERSION', '2');
 get({});
 assert.ok(ctx.headerMap_(old)['管理備註'] && ctx.headerMap_(old)['自訂欄位']);
 assert.equal(sheets.get('活動設定').rows.length, 3); // 不會重複寫入種子活動
 console.log('✓ schema upgrade adds missing columns');
+
+// 17. 從 v2（每個活動一張分頁）升級：第一張改名成共用分頁，其他逐列合併，舊分頁保留
+{
+  const sb = createSandbox({ props: { WEBAPP_URL: WEBAPP, SCHEMA_VERSION: '2' } });
+  const ins = (name, rows) => { const sh = sb.ss.insertSheet(name); rows.forEach((r) => sh.appendRow(r)); return sh; };
+  const OLD_ORDER = ['訂單編號', '狀態', '建立時間', '活動', '總金額', '查詢碼', '管理備註'];
+  ins('活動設定', [sb.ctx.CAMPAIGN_HEADERS, ['2026Birthday', '多帕2026生日周邊', 'TB26', 'aio'], ['Old', '舊活動', 'OLD1', 'aio']]);
+  ins('運送方式', [sb.ctx.SHIPPING_HEADERS, ['2026Birthday', '7-11店到店', '超商', 60, 1, true]]);
+  ins('訂單_2026Birthday', [OLD_ORDER, ['TB26A', '已付款', new Date(), '2026Birthday', 580, 'tok1', '已寄出']]);
+  ins('訂單_Old', [OLD_ORDER, ['OLD1B', '付款中', new Date(), '', 100, 'tok2', '']]);
+  ins('商品_2026Birthday', [['商品代碼', '商品名稱', '內容', '單價', '上架', '排序'], ['MOUSEPAD', '滑鼠也滑狗', '', 520, true, 1]]);
+  const g = (p) => JSON.parse(sb.ctx.doGet({ parameter: p }).body);
+  assert.equal(g({}).schema, '3');
+  const names = [...sb.sheets.keys()];
+  assert.ok(names.includes('訂單') && names.includes('商品'));
+  assert.ok(!names.includes('訂單_2026Birthday') && !names.includes('商品_2026Birthday'));
+  assert.ok(names.includes('（已合併）訂單_Old'));
+  const orders = sb.ctx.readTable_(sb.sheets.get('訂單')).rows;
+  assert.deepEqual(JSON.parse(JSON.stringify(orders.map((o) => [o['訂單編號'], o['活動'], o['管理備註']]))),
+    [['TB26A', '2026Birthday', '已寄出'], ['OLD1B', 'Old', '']]);
+  assert.equal(g({ action: 'orderStatus', campaign: '2026Birthday', o: 'TB26A', t: 'tok1' }).status, '已付款');
+  assert.equal(g({ action: 'orderStatus', campaign: 'Old', o: 'OLD1B', t: 'tok2' }).ok, true);
+  assert.deepEqual(g({ action: 'campaign', campaign: '2026Birthday' }).products.map((p) => p.sku), ['MOUSEPAD']);
+  assert.equal(sb.ctx.readTable_(sb.sheets.get('商品')).rows.length, 1); // 不會重複寫入種子商品
+  console.log('✓ legacy per-campaign tabs merged into shared tabs');
+}
 
 console.log('\nall flow tests passed; log rows:', sheets.get('綠界通知紀錄').rows.length - 1);

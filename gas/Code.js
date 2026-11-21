@@ -146,7 +146,7 @@ function createOrder_(data) {
   lock.waitLock(20000);
   var orderNo, thanksUrl;
   try {
-    var sheet = ensureCampaignSheet_(c.orderSheet, ORDER_HEADERS);
+    var sheet = sheet_(ORDER_SHEET);
     try { sweepExpired_(c, sheet, createdAt); } catch (err) { console.error('sweepExpired_', err && err.stack || err); }
     do { orderNo = newOrderNo_(c.orderPrefix, createdAt); } while (findRow_(sheet, orderNo));
     thanksUrl = thanksBase + '?o=' + orderNo + '&t=' + token;
@@ -240,11 +240,11 @@ function reportPaid_(data) {
   var lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
-    var sheet = sheet_(c.orderSheet);
+    var sheet = sheet_(ORDER_SHEET);
     var row = findRow_(sheet, String(data.orderNo));
     if (!row) throw userError_('NOT_FOUND', '查無此訂單');
     var o = readObject_(sheet, row);
-    if (String(o['查詢碼']) !== String(data.token)) throw userError_('NOT_FOUND', '查無此訂單');
+    if (String(o['查詢碼']) !== String(data.token) || String(o['活動']) !== c.id) throw userError_('NOT_FOUND', '查無此訂單');
     if (o['狀態'] === STATUS.PENDING && !o['顧客回報付款']) {
       var now = new Date();
       updateObject_(sheet, row, { '顧客回報付款': now, '最後更新': now });
@@ -284,7 +284,7 @@ function handleEcpayCallback_(kind, params) {
     var lock = LockService.getScriptLock();
     lock.waitLock(20000);
     try {
-      var sheet = sheet_(c.orderSheet);
+      var sheet = sheet_(ORDER_SHEET);
       var row = findRow_(sheet, orderNo);
       if (!row) return { ok: false };
       var order = readObject_(sheet, row);
@@ -404,12 +404,11 @@ function resultPage_(result) {
 function orderStatus_(campaignId, orderNo, token) {
   var c = loadCampaign_(campaignId);
   if (!c || !orderNo || !token) throw userError_('NOT_FOUND', '查無此訂單');
-  var sheet = spreadsheet_().getSheetByName(c.orderSheet);
-  if (!sheet) throw userError_('NOT_FOUND', '查無此訂單');
+  var sheet = sheet_(ORDER_SHEET);
   var row = findRow_(sheet, String(orderNo));
   if (!row) throw userError_('NOT_FOUND', '查無此訂單');
   var o = readObject_(sheet, row);
-  if (String(o['查詢碼']) !== String(token)) throw userError_('NOT_FOUND', '查無此訂單');
+  if (String(o['查詢碼']) !== String(token) || String(o['活動']) !== c.id) throw userError_('NOT_FOUND', '查無此訂單');
 
   // 查詢時順便標記逾期（重新在鎖內讀一次，避免蓋掉同時進來的付款通知）
   var now = new Date();

@@ -81,8 +81,11 @@ function asText_(s) {
 
 /** 讀取上架中的商品，回傳 { bySku, list }（list 依排序欄位）。 */
 function readProducts_(campaign) {
-  var list = readTable_(ensureCampaignSheet_(campaign.productSheet, PRODUCT_HEADERS)).rows
-    .filter(function (r) { return String(r['商品代碼'] || '').trim() && isOn_(r['上架'], false); })
+  var list = readTable_(sheet_(PRODUCT_SHEET)).rows
+    .filter(function (r) {
+      return String(r['活動代碼'] || '').trim() === campaign.id &&
+        String(r['商品代碼'] || '').trim() && isOn_(r['上架'], false);
+    })
     .map(function (r) {
       return {
         sku: String(r['商品代碼']).trim(),

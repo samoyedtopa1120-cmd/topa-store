@@ -17,6 +17,10 @@ function chainable() {
 class FakeSheet {
   constructor(name) { this.name = name; this.rows = []; }
   getName() { return this.name; }
+  setName(n) {
+    if (this.registry.has(n)) throw new Error('sheet exists: ' + n);
+    this.registry.delete(this.name); this.name = n; this.registry.set(n, this); return this;
+  }
   getLastRow() { return this.rows.length; }
   getLastColumn() { return this.rows.reduce((m, r) => Math.max(m, r.length), 0); }
   getMaxRows() { return Math.max(1000, this.rows.length); }
@@ -62,7 +66,10 @@ export function createSandbox({ props = {} } = {}) {
   const sheets = new Map();
   const ss = {
     getSheetByName: (n) => sheets.get(n) || null,
-    insertSheet: (n) => { const s = new FakeSheet(n); sheets.set(n, s); return s; },
+    insertSheet: (n) => {
+      if (sheets.has(n)) throw new Error('sheet exists: ' + n);
+      const s = new FakeSheet(n); s.registry = sheets; sheets.set(n, s); return s;
+    },
     getId: () => 'FAKE_SS',
     getUrl: () => 'https://docs.google.com/spreadsheets/d/FAKE_SS',
     setSpreadsheetTimeZone: () => {},
@@ -118,5 +125,5 @@ export function createSandbox({ props = {} } = {}) {
   for (const f of fs.readdirSync(GAS_DIR).filter((f) => f.endsWith('.js')).sort()) {
     vm.runInContext(fs.readFileSync(path.join(GAS_DIR, f), 'utf8'), ctx, { filename: f });
   }
-  return { ctx, sheets, props: store };
+  return { ctx, sheets, ss, props: store };
 }

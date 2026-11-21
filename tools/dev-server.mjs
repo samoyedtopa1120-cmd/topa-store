@@ -25,7 +25,7 @@ http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
   if (url.pathname === '/gas/simulate') {
     const no = url.searchParams.get('o');
-    const sheet = sheets.get('訂單_2026Birthday');
+    const sheet = sheets.get('訂單');
     const row = ctx.findRow_(sheet, no);
     if (!row) return send(res, 404, 'no such order');
     const o = ctx.readObject_(sheet, row);
