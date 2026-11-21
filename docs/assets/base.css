@@ -49,7 +49,12 @@ a { color: var(--accent); }
 .wrap { max-width: 600px; margin: 0 auto; padding: 0 16px; }
 
 /* ---------- hero ---------- */
-.hero { padding: 40px 0 8px; text-align: center; }
+.hero { padding: 24px 0 8px; text-align: center; }
+.hero .key-visual {
+  width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+  border-radius: var(--radius); margin: 0 0 22px;
+  box-shadow: 0 12px 28px #235c851f; background: var(--accent-soft);
+}
 .hero .eyebrow {
   display: inline-block; padding: 4px 14px; border-radius: 999px;
   background: var(--accent-soft); color: var(--accent); font-weight: 800; font-size: 14px; letter-spacing: .08em;
