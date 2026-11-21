@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>多帕 2026 生日周邊預購</title>
+  <meta name="description" content="多帕 2026 生日周邊：厚壓克力磚、大滑鼠墊、親簽明信片。預購至 11/22（日）23:59。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/base.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <span class="eyebrow">2026 多帕生日周邊</span>
+      <h1>又＿＿了一歲！<br>謝謝大家的祝福</h1>
+      <p>本來今年生日不打算出周邊，奈何 Rocks 寶貝畫的圖太美……<br>於是乎今年出了防身武器（x）和新滑鼠墊！</p>
+      <p class="deadline">預購只到 <strong>11/22（日）23:59</strong>，走過路過不要錯過！</p>
+      <ol class="steps">
+        <li>填寫表單</li>
+        <li>綠界付款<small>信用卡／ATM／超商</small></li>
+        <li>超商取貨<small>7-11／全家店到店</small></li>
+      </ol>
+    </header>
+
+    <div id="closed" class="closed" hidden>
+      <h2>預購已截止</h2>
+      <p>謝謝大家的支持！汪汪汪汪汪 HBD!!</p>
+    </div>
+
+    <form id="order" novalidate>
+      <section class="section">
+        <h2><span class="num">01</span>你是誰？</h2>
+        <p class="hint">請提供多帕認得出來的 ID</p>
+        <div class="field">
+          <label for="nickname">暱稱 / ID</label>
+          <input id="nickname" name="nickname" type="text" maxlength="50" autocomplete="nickname" required>
+          <span class="err">請填寫暱稱或 ID</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2><span class="num">02</span>選購商品</h2>
+        <p class="hint">商品圖面：本次生日主視覺（直播封面）</p>
+        <div id="products" class="products"></div>
+        <p id="items-err" class="alert" hidden>請至少選擇一項商品</p>
+      </section>
+
+      <section class="section">
+        <h2><span class="num">03</span>取貨資訊</h2>
+        <p class="hint">一律超商店到店，運費固定 NT$60</p>
+        <div class="field">
+          <label>取貨方式</label>
+          <div class="chips" id="pickup"></div>
+        </div>
+        <div class="field">
+          <label for="name">收件人姓名<span class="opt">請填本名，取貨時需核對證件</span></label>
+          <input id="name" name="name" type="text" maxlength="30" autocomplete="name" required>
+          <span class="err">請填寫收件人本名</span>
+        </div>
+        <div class="field">
+          <label for="phone">手機號碼</label>
+          <input id="phone" name="phone" type="tel" inputmode="numeric" maxlength="12" autocomplete="tel" placeholder="0912345678" required>
+          <span class="err">請填寫 09 開頭的 10 碼手機號碼</span>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="storeName">取貨門市名稱</label>
+            <input id="storeName" name="storeName" type="text" maxlength="50" placeholder="例：鑫台北門市" required>
+            <span class="err">請填寫門市名稱</span>
+          </div>
+          <div class="field">
+            <label for="storeId">門市店號<span class="opt">選填</span></label>
+            <input id="storeId" name="storeId" type="text" inputmode="numeric" maxlength="8" placeholder="例：123456">
+            <span class="err">店號只能是數字</span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email<span class="opt">選填，方便聯絡出貨問題</span></label>
+          <input id="email" name="email" type="email" maxlength="100" autocomplete="email">
+          <span class="err">Email 格式不正確</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2><span class="num">04</span>預購須知</h2>
+        <ol class="notes">
+          <li>送出後會直接前往綠界付款。選擇 ATM 或超商代碼者，請於繳費期限內完成付款，逾期視同訂單不成立。</li>
+          <li>有任何疑問可透過 Email、DC 等方式向多帕提出。</li>
+          <li>商品尺寸可能因為印製有些微誤差。</li>
+        </ol>
+        <label class="agree" id="agree-box">
+          <input type="checkbox" id="agree" name="agree">
+          <span>同意啦哪次不同意！（已閱讀並接受以上內容）</span>
+        </label>
+      </section>
+
+      <div class="honeypot" aria-hidden="true">
+        <label>請勿填寫 <input type="text" name="website" id="hp" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <p id="form-err" class="alert" role="alert" hidden></p>
+    </form>
+
+    <footer>謝謝大家的生日祝福，以及購買！汪汪汪汪汪 HBD!!</footer>
+    <div class="spacer"></div>
+  </main>
+
+  <div class="checkout" id="checkout">
+    <div class="wrap">
+      <div class="sum">
+        <div class="total" id="total">NT$0</div>
+        <div class="break" id="breakdown">尚未選擇商品</div>
+      </div>
+      <button class="btn" id="submit" type="submit" form="order">前往付款</button>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="../assets/order-core.js"></script>
+  <script>
+  (function () {
+    'use strict';
+    const C = window.CAMPAIGN;
+    const T = window.TopaOrder;
+    const $ = (id) => document.getElementById(id);
+    const qty = Object.fromEntries(C.products.map((p) => [p.sku, 0]));
+
+    // ---------- 截止 ----------
+    if (Date.now() > new Date(C.deadline).getTime()) {
+      $('closed').hidden = false;
+      $('order').hidden = true;
+      $('checkout').hidden = true;
+      return;
+    }
+
+    // ---------- 商品 ----------
+    const list = $('products');
+    C.products.forEach((p) => {
+      const el = document.createElement('div');
+      el.className = 'product';
+      el.dataset.sku = p.sku;
+      el.innerHTML =
+        (p.image ? `<img src="${p.image}" alt="" loading="lazy">` : '') +
+        `<div class="info"><div class="name"></div><div class="desc"></div><div class="price"></div></div>` +
+        `<div class="stepper">` +
+        `<button type="button" data-d="-1" aria-label="減少">−</button>` +
+        `<output aria-live="polite">0</output>` +
+        `<button type="button" data-d="1" aria-label="增加">＋</button></div>`;
+      el.querySelector('.name').textContent = p.name;
+      if (p.badge) {
+        const b = document.createElement('span');
+        b.className = 'badge'; b.textContent = p.badge;
+        el.querySelector('.name').appendChild(b);
+      }
+      el.querySelector('.desc').textContent = p.desc;
+      el.querySelector('.price').textContent = T.formatNT(p.price);
+      el.querySelectorAll('button').forEach((btn) => btn.addEventListener('click', () => {
+        qty[p.sku] = Math.max(0, Math.min(C.maxQty, qty[p.sku] + Number(btn.dataset.d)));
+        render();
+      }));
+      list.appendChild(el);
+    });
+
+    // ---------- 取貨方式 ----------
+    C.pickupMethods.forEach((m, i) => {
+      const label = document.createElement('label');
+      label.className = 'chip';
+      label.innerHTML = `<input type="radio" name="pickup" required><span></span>`;
+      label.querySelector('input').value = m;
+      label.querySelector('input').checked = i === 0;
+      label.querySelector('span').textContent = m;
+      $('pickup').appendChild(label);
+    });
+
+    function render() {
+      let subtotal = 0, count = 0;
+      C.products.forEach((p) => {
+        const el = list.querySelector(`[data-sku="${p.sku}"]`);
+        el.querySelector('output').textContent = qty[p.sku];
+        el.classList.toggle('picked', qty[p.sku] > 0);
+        el.querySelector('[data-d="-1"]').disabled = qty[p.sku] === 0;
+        el.querySelector('[data-d="1"]').disabled = qty[p.sku] >= C.maxQty;
+        subtotal += p.price * qty[p.sku];
+        count += qty[p.sku];
+      });
+      if (count) $('items-err').hidden = true;
+      $('total').textContent = T.formatNT(count ? subtotal + C.shippingFee : 0);
+      $('breakdown').textContent = count
+        ? `${count} 件商品 ${T.formatNT(subtotal)} ＋ 運費 ${T.formatNT(C.shippingFee)}`
+        : '尚未選擇商品';
+      return count;
+    }
+    render();
+
+    // ---------- 驗證 ----------
+    const rules = {
+      nickname: (v) => v.length > 0,
+      name: (v) => v.length > 0,
+      phone: (v) => /^09\d{8}$/.test(v.replace(/[\s-]/g, '')),
+      storeName: (v) => v.length > 0,
+      storeId: (v) => !v || /^\d{4,8}$/.test(v),
+      email: (v) => !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+    };
+    function check(id) {
+      const input = $(id);
+      const ok = rules[id](input.value.trim());
+      input.closest('.field').classList.toggle('invalid', !ok);
+      return ok;
+    }
+    Object.keys(rules).forEach((id) => $(id).addEventListener('blur', () => check(id)));
+    $('agree').addEventListener('change', () => $('agree-box').classList.remove('invalid'));
+
+    // ---------- 送出 ----------
+    const form = $('order');
+    const submit = $('submit');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      $('form-err').hidden = true;
+
+      const firstBad = Object.keys(rules).filter((id) => !check(id))[0];
+      const hasItems = render() > 0;
+      $('items-err').hidden = hasItems;
+      const agreed = $('agree').checked;
+      $('agree-box').classList.toggle('invalid', !agreed);
+      if (firstBad || !hasItems || !agreed) {
+        const target = !hasItems ? $('products') : firstBad ? $(firstBad) : $('agree-box');
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (firstBad) $(firstBad).focus({ preventScroll: true });
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = '建立訂單中…';
+      try {
+        const res = await T.createOrder(C.gasUrl, {
+          campaign: C.id,
+          formVersion: C.formVersion,
+          buyer: {
+            nickname: $('nickname').value.trim(),
+            name: $('name').value.trim(),
+            phone: $('phone').value.trim(),
+            email: $('email').value.trim()
+          },
+          shipping: {
+            method: form.querySelector('input[name="pickup"]:checked').value,
+            storeName: $('storeName').value.trim(),
+            storeId: $('storeId').value.trim()
+          },
+          items: C.products.map((p) => ({ sku: p.sku, qty: qty[p.sku] })).filter((i) => i.qty > 0),
+          agree: true,
+          hp: $('hp').value,
+          thanksUrl: new URL('thanks.html', location.href).href
+        });
+        if (!res.ok) throw new Error(res.message || '建立訂單失敗，請稍後再試');
+        if (res.payment && res.payment.mode === 'donate') {
+          location.href = res.thanksUrl; // 付款說明在訂單頁
+          return;
+        }
+        submit.textContent = '前往綠界付款…';
+        T.redirectToEcpay(res.ecpay);
+      } catch (err) {
+        $('form-err').textContent = err.message;
+        $('form-err').hidden = false;
+        $('form-err').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        submit.disabled = false;
+        submit.textContent = '前往付款';
+      }
+    });
+
+    // 從綠界按「上一頁」回來時，恢復按鈕
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) { submit.disabled = false; submit.textContent = '前往付款'; }
+    });
+  })();
+  </script>
+</body>
+</html>
