@@ -93,17 +93,24 @@
       card.querySelector('p').textContent = text;
     }
 
+    const FAILED = { '付款失敗': ['付款沒有成功', '這筆訂單未完成付款，請回預購頁重新下單，或聯絡多帕。'],
+      '逾期未付': ['訂單已逾期', '超過付款期限仍未收到款項，請回預購頁重新下單，或聯絡多帕。'],
+      '已取消': ['訂單已取消', '這筆訂單已取消，有疑問請聯絡多帕。'],
+      '已退款': ['訂單已退款', '這筆訂單已退款，有疑問請聯絡多帕。'] };
+    let mode = C.paymentMode;
+
     function showOrder(o) {
-      const kind = o.status === '已付款' ? 'paid' : o.status === '付款失敗' ? 'failed' : 'pending';
-      const donate = C.paymentMode === 'donate' && kind === 'pending';
+      if (o.paymentMode) mode = o.paymentMode;
+      const kind = o.status === '已付款' ? 'paid' : FAILED[o.status] ? 'failed' : 'pending';
+      const donate = mode === 'donate' && kind === 'pending';
       $('pay').hidden = !donate;
       if (!donate) card.hidden = false;
       if (donate) {
         showDonate(o);
       } else if (kind === 'paid') {
-        showCard('paid', '✓', '付款完成，謝謝支持！', '多帕收到你的訂單了，出貨後會寄到你選的門市。');
+        showCard('paid', '✓', '付款完成，謝謝支持！', '多帕收到你的訂單了，出貨後會依你選的取貨方式寄送。');
       } else if (kind === 'failed') {
-        showCard('failed', '!', '付款沒有成功', '這筆訂單未完成付款，請回預購頁重新下單，或聯絡多帕。');
+        showCard('failed', '!', FAILED[o.status][0], FAILED[o.status][1]);
       } else if (o.paymentInfo) {
         showCard('pending', '…', '訂單成立，等待繳費', '請在繳費期限內完成付款，入帳後狀態會自動更新。');
       } else {
@@ -129,7 +136,7 @@
       if (o.reportedAt) showCard('pending', '✓', '已收到你的付款回報', '多帕對帳確認後，狀態會改為「已付款」。');
       $('p-amount').textContent = String(o.amount);
       $('p-order').textContent = o.orderNo;
-      $('p-go').href = C.donateUrl;
+      $('p-go').href = o.donateUrl || C.donateUrl;
       $('p-done').hidden = !!o.reportedAt;
       $('p-reported').hidden = !o.reportedAt;
       $('p-reported').textContent = o.reportedAt
@@ -170,7 +177,7 @@
         if (!o.ok) throw new Error(o.message || '查無此訂單');
         const kind = showOrder(o);
         // 綠界通知可能比客戶晚到幾秒，付款中且沒有繳費資訊時再查幾次（贊助頁模式不會自動回寫，不用重查）
-        if (C.paymentMode !== 'donate' && kind === 'pending' && !o.paymentInfo && attempt < 8) {
+        if (mode !== 'donate' && kind === 'pending' && !o.paymentInfo && attempt < 8) {
           setTimeout(() => load(attempt + 1), 2500);
         }
       } catch (err) {

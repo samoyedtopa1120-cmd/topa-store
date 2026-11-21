@@ -56,6 +56,12 @@
     return callGas(gasUrl + '?' + q.toString(), { method: 'GET' });
   }
 
+  /** 活動公開資訊（商品、價格、運送方式），以試算表為準。 */
+  function getCampaign(gasUrl, campaign) {
+    const q = new URLSearchParams({ action: 'campaign', campaign: campaign });
+    return callGas(gasUrl + '?' + q.toString(), { method: 'GET' });
+  }
+
   function reportPaid(gasUrl, campaign, orderNo, token) {
     return callGas(gasUrl + '?action=reportPaid', {
       method: 'POST',
@@ -64,5 +70,5 @@
     });
   }
 
-  window.TopaOrder = { formatNT, createOrder, redirectToEcpay, getStatus, reportPaid };
+  window.TopaOrder = { formatNT, createOrder, redirectToEcpay, getStatus, getCampaign, reportPaid };
 })();

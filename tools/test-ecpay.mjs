@@ -32,7 +32,7 @@ if (process.argv.includes('--live')) {
   const order = {
     orderNo: 'TEST' + Date.now().toString().slice(-12) + 'ZZZZ',
     campaignId: '2026Birthday',
-    campaign: ctx.CAMPAIGNS['2026Birthday'],
+    campaign: { title: '多帕2026生日周邊', atmExpireDays: 1, cvsExpireMinutes: 1440, ignorePayment: 'BARCODE' },
     total: 1180,
     itemName: '生日快樂之我全都要 NT$1120 x 1#運費 NT$60 x 1',
     createdAt: new Date(),
