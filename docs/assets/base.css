@@ -247,25 +247,3 @@ dl.detail dd { margin: 0; white-space: pre-line; word-break: break-all; font-wei
 .actions .btn { text-align: center; }
 .note-ok { background: var(--ok-soft); color: var(--ok); border-radius: 12px; padding: 12px 14px; margin-top: 12px; }
 
-/* ---------- 表單總覽頁（網站根目錄） ---------- */
-.hub-list { display: grid; gap: 16px; margin: 8px 0 16px; }
-.hub-card {
-  display: block; overflow: hidden; color: inherit; text-decoration: none;
-  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-  box-shadow: 0 8px 20px #235c8512; transition: transform .2s, box-shadow .2s, border-color .2s;
-}
-.hub-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 14px 28px #235c851f; }
-.hub-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
-.hub-card img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: var(--accent-soft); }
-.hub-body { padding: 16px 20px 20px; }
-.hub-top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; color: var(--ink-soft); }
-.hub-pill { padding: 2px 12px; border-radius: 999px; font-weight: 800; font-size: 13px; }
-.hub-open .hub-pill { background: var(--pink); color: #fff; }
-.hub-soon .hub-pill { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--line); }
-.hub-closed .hub-pill { background: #eef2f5; color: var(--ink-soft); }
-.hub-card h2 { font-family: var(--font-display); font-weight: 500; font-size: 22px; line-height: 1.4; margin: 8px 0 2px; }
-.hub-card p { margin: 0; color: var(--ink-soft); font-size: 14px; }
-.hub-go { display: inline-block; margin-top: 12px; font-weight: 800; color: var(--accent); }
-.hub-closed img { filter: grayscale(.6); opacity: .75; }
-.hub-past > h2 { font-family: var(--font-display); font-weight: 500; font-size: 18px; color: var(--ink-soft); margin: 24px 4px 4px; }
-footer a { color: var(--accent); font-weight: 700; text-decoration: none; }
