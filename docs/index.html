@@ -2,19 +2,106 @@
 <html lang="zh-Hant-TW">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>多帕周邊</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>多帕周邊預購</title>
+  <meta name="description" content="多帕（Topa Ch.）所有周邊預購表單。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="多帕周邊預購">
+  <meta property="og:description" content="多帕（Topa Ch.）所有周邊預購表單。">
+  <meta property="og:image" content="https://samoyedtopa1120-cmd.github.io/topa-store/2026Birthday/img/key-visual.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#f4faff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/base.css">
 </head>
 <body>
-  <main class="wrap" style="padding-top:48px">
-    <section class="section" style="text-align:center">
-      <h2 style="justify-content:center">多帕周邊</h2>
-      <p class="hint">目前開放中的預購</p>
-      <a class="btn" href="2026Birthday/">2026 生日周邊</a>
+  <main class="wrap">
+    <header class="hero">
+      <span class="eyebrow">Topa Ch. 多帕</span>
+      <h1>多帕周邊預購</h1>
+      <p>所有周邊的預購表單都在這裡，點進去就能下單。</p>
+    </header>
+
+    <div id="open-list" class="hub-list"></div>
+
+    <section id="past" class="hub-past" hidden>
+      <h2>已截止</h2>
+      <div id="past-list" class="hub-list"></div>
     </section>
+
+    <p id="empty" class="closed" hidden>目前沒有預購表單，敬請期待！</p>
+
+    <footer>
+      <a href="https://samoyedtopa1120-cmd.github.io/topa-homepage/">多帕官網</a>
+    </footer>
   </main>
+
+  <script src="campaigns.js"></script>
+  <script>
+  (function () {
+    'use strict';
+    const now = Date.now();
+    const fmt = (d) => {
+      const t = new Date(d);
+      const w = '日一二三四五六'[t.getDay()];
+      const hm = t.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false });
+      return `${t.getMonth() + 1}/${t.getDate()}（${w}）${hm}`;
+    };
+    const left = (ms) => {
+      const h = Math.floor(ms / 3600000);
+      if (h >= 48) return `剩 ${Math.floor(h / 24)} 天`;
+      if (h >= 1) return `剩 ${h} 小時`;
+      return `剩 ${Math.max(1, Math.ceil(ms / 60000))} 分鐘`;
+    };
+
+    const items = (window.CAMPAIGNS || []).map((c) => {
+      const end = new Date(c.deadline).getTime();
+      const start = c.opens ? new Date(c.opens).getTime() : 0;
+      const state = now < start ? 'soon' : now <= end ? 'open' : 'closed';
+      return { ...c, end, start, state };
+    });
+
+    function card(c) {
+      const a = document.createElement('a');
+      a.className = 'hub-card hub-' + c.state;
+      a.href = c.path;
+      a.innerHTML =
+        (c.image ? '<img alt="" loading="lazy" width="1200" height="675">' : '') +
+        '<div class="hub-body"><div class="hub-top"><span class="hub-pill"></span><span class="hub-when"></span></div>' +
+        '<h2></h2><p></p><span class="hub-go"></span></div>';
+      if (c.image) a.querySelector('img').src = c.image;
+      a.querySelector('h2').textContent = c.title;
+      a.querySelector('p').textContent = c.desc || '';
+      const pill = a.querySelector('.hub-pill');
+      const when = a.querySelector('.hub-when');
+      const go = a.querySelector('.hub-go');
+      if (c.state === 'open') {
+        pill.textContent = '預購中';
+        when.textContent = `${left(c.end - now)}・${fmt(c.end)} 截止`;
+        go.textContent = '前往預購 →';
+      } else if (c.state === 'soon') {
+        pill.textContent = '即將開放';
+        when.textContent = `${fmt(c.start)} 開放`;
+        go.textContent = '先看看 →';
+      } else {
+        pill.textContent = '已截止';
+        when.textContent = `${fmt(c.end)} 截止`;
+        go.textContent = '查看頁面 →';
+      }
+      return a;
+    }
+
+    const active = items.filter((c) => c.state !== 'closed')
+      .sort((x, y) => (x.state === y.state ? x.end - y.end : x.state === 'open' ? -1 : 1));
+    const past = items.filter((c) => c.state === 'closed').sort((x, y) => y.end - x.end);
+
+    active.forEach((c) => document.getElementById('open-list').appendChild(card(c)));
+    past.forEach((c) => document.getElementById('past-list').appendChild(card(c)));
+    document.getElementById('past').hidden = past.length === 0;
+    document.getElementById('empty').hidden = active.length > 0;
+  })();
+  </script>
 </body>
 </html>

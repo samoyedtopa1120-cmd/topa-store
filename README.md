@@ -12,6 +12,8 @@ tools/                   本機測試與預覽
 
 網址：`https://<帳號>.github.io/<repo>/2026Birthday/`。新活動或改版就複製一個資料夾（例如 `2026Birthday-v2/`），並在 `gas/Config.js` 的 `CAMPAIGNS` 加一筆。
 
+網站根目錄（無後綴網址）是表單總覽頁，會列出 `docs/campaigns.js` 裡的所有活動，依截止時間自動顯示「預購中／即將開放／已截止」。新增活動時記得在 `docs/campaigns.js` 也加一筆。
+
 ## 付款模式
 
 每個活動在 `gas/Config.js` 與 `docs/<活動>/config.js` 設定 `paymentMode`（兩邊要一致）：
