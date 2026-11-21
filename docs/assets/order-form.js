@@ -21,15 +21,35 @@
     });
   }
 
-  // ---------- 截止（只有前端） ----------
-  if (C.deadline && Date.now() > new Date(C.deadline).getTime()) {
-    $('closed').hidden = false;
+  // ---------- 開始 / 截止時間（只有前端，後端不鎖） ----------
+  const fmtTime = (d) => {
+    const t = new Date(d);
+    const hm = String(t.getHours()).padStart(2, '0') + ':' + String(t.getMinutes()).padStart(2, '0');
+    return `${t.getMonth() + 1}/${t.getDate()}（${'日一二三四五六'[t.getDay()]}）${hm}`;
+  };
+  const isClosed = () => !!C.deadline && Date.now() > new Date(C.deadline).getTime();
+  function showClosed(title, text) {
+    const box = $('closed');
+    if (title) box.querySelector('h2').textContent = title;
+    if (text) box.querySelector('p').textContent = text;
+    box.hidden = false;
     $('order').hidden = true;
     $('checkout').hidden = true;
+  }
+  if (C.opens && Date.now() < new Date(C.opens).getTime()) {
+    showClosed('預購尚未開始', `將於 ${fmtTime(C.opens)} 開放，敬請期待！`);
+    return;
+  }
+  if (isClosed()) {
+    showClosed();
     return;
   }
 
-  const maxQty = Number(C.maxQty) || 99;
+  const maxQty = Number(C.maxQty) || 99;     // 每項商品上限（config.js 可再針對單一商品設定 maxQty）
+  const maxTotal = Number(C.maxTotal) || 0;  // 整張訂單總件數上限，0 = 不限
+  const limitOf = (sku) => Number((extras[sku] || {}).maxQty) || maxQty;
+  const soldOut = (sku) => !!(extras[sku] || {}).soldOut;
+  const totalQty = () => Object.values(qty).reduce((a, b) => a + b, 0);
   const extras = Object.fromEntries((C.products || []).map((p) => [p.sku, p])); // 圖片、標籤
   let products = (C.products || []).slice();
   let shipping = (C.shipping || []).slice();
@@ -46,7 +66,7 @@
       const image = p.image || extra.image;
       const badge = p.badge || extra.badge;
       const el = document.createElement('div');
-      el.className = 'product';
+      el.className = 'product' + (soldOut(p.sku) ? ' soldout' : '');
       el.dataset.sku = p.sku;
       el.innerHTML =
         (image ? '<img alt="" loading="lazy">' : '') +
@@ -57,15 +77,20 @@
         '<button type="button" data-d="1" aria-label="增加">＋</button></div>';
       if (image) el.querySelector('img').src = image;
       el.querySelector('.name').textContent = p.name;
-      if (badge) {
+      const addBadge = (text, cls) => {
         const b = document.createElement('span');
-        b.className = 'badge'; b.textContent = badge;
+        b.className = cls; b.textContent = text;
         el.querySelector('.name').appendChild(b);
-      }
+      };
+      if (badge) addBadge(badge, 'badge');
+      if (soldOut(p.sku)) addBadge('已售完', 'badge badge-out');
+      if (soldOut(p.sku)) qty[p.sku] = 0;
       el.querySelector('.desc').textContent = p.desc || extra.desc || '';
       el.querySelector('.price').textContent = T.formatNT(p.price);
       el.querySelectorAll('button').forEach((btn) => btn.addEventListener('click', () => {
-        qty[p.sku] = Math.max(0, Math.min(maxQty, qty[p.sku] + Number(btn.dataset.d)));
+        const d = Number(btn.dataset.d);
+        if (d > 0 && maxTotal && totalQty() >= maxTotal) return;
+        qty[p.sku] = Math.max(0, Math.min(limitOf(p.sku), qty[p.sku] + d));
         render();
       }));
       list.appendChild(el);
@@ -210,7 +235,8 @@
       el.querySelector('output').textContent = qty[p.sku];
       el.classList.toggle('picked', qty[p.sku] > 0);
       el.querySelector('[data-d="-1"]').disabled = qty[p.sku] === 0;
-      el.querySelector('[data-d="1"]').disabled = qty[p.sku] >= maxQty;
+      el.querySelector('[data-d="1"]').disabled = soldOut(p.sku) || qty[p.sku] >= limitOf(p.sku) ||
+        (maxTotal > 0 && totalQty() >= maxTotal);
       subtotal += p.price * qty[p.sku];
       count += qty[p.sku];
     });
@@ -270,6 +296,7 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     $('form-err').hidden = true;
+    if (isClosed()) { showClosed(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
 
     const firstBad = Object.keys(rules).filter((id) => !check(id))[0];
     const badQ = questions.map((_, i) => i).filter((i) => !checkQuestion(i))[0];

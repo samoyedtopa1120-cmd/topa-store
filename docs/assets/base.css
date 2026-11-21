@@ -140,6 +140,8 @@ select { appearance: none; background-image: linear-gradient(45deg, transparent 
   display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px;
   background: var(--pink); color: #fff; font-size: 12px; font-weight: 800; vertical-align: 2px;
 }
+.product .badge-out { background: #eef2f5; color: var(--ink-soft); }
+.product.soldout { opacity: .6; }
 .product .desc { color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
 .product .price { font-weight: 800; color: var(--accent); }
 .product .info { grid-column: 1; }
