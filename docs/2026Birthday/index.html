@@ -194,6 +194,9 @@
     }
     render();
 
+    // 頁面載入時先喚醒 Apps Script，避免送單時冷啟動要等十幾秒
+    if (C.gasUrl) fetch(C.gasUrl, { mode: 'no-cors' }).catch(() => {});
+
     // ---------- 驗證 ----------
     const rules = {
       nickname: (v) => v.length > 0,
