@@ -1,22 +1,29 @@
 /* 各活動共用樣式。活動可在自己的頁面覆寫 :root 變數換主題色。 */
 :root {
-  --paper: #fff8ee;
+  /* 多帕配色（同 topa-homepage）：雪地淡藍底、薩摩耶藍主色、粉紅點綴 */
+  --paper: #f4faff;
   --card: #ffffff;
-  --ink: #2b2118;
-  --ink-soft: #6b5b4d;
-  --line: #eadccb;
-  --accent: #e8590c;
+  --field: #ffffff;
+  --ink: #294b63;
+  --ink-soft: #597587;
+  --line: #d6e9f5;
+  --accent: #287bb9;
+  --accent-deep: #235c85;
   --accent-ink: #ffffff;
-  --accent-soft: #fff1e6;
+  --accent-soft: #eff8fd;
+  --accent-shadow: #d0e7f6;
+  --dots: #b4d5e8;
+  --pink: #ff8fb1;
+  --pink-soft: #fff0f5;
   --ok: #2f7a4f;
   --ok-soft: #e8f5ec;
-  --warn: #a15c00;
+  --warn: #9a5b00;
   --warn-soft: #fff4d6;
-  --err: #b42318;
-  --err-soft: #fdecea;
-  --radius: 18px;
-  --font: "Noto Sans TC", system-ui, -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
-  --font-display: "Huninn", "Noto Sans TC", system-ui, sans-serif;
+  --err: #c4314b;
+  --err-soft: #fdecef;
+  --radius: 24px;
+  --font: "Nunito", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --font-display: "Kiwi Maru", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -25,8 +32,17 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font: 16px/1.7 var(--font);
+  font: 16px/1.75 var(--font);
+  -webkit-font-smoothing: antialiased;
 }
+/* 頁首的雪點點，和官網 hero 一樣 */
+body::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 520px; z-index: -1; pointer-events: none;
+  background-image: radial-gradient(var(--dots) 1px, transparent 1px); background-size: 24px 24px;
+  opacity: .45; -webkit-mask-image: linear-gradient(transparent, #000 20%, transparent);
+  mask-image: linear-gradient(transparent, #000 20%, transparent);
+}
+::selection { background: #cee9ff; }
 img { max-width: 100%; display: block; }
 a { color: var(--accent); }
 
@@ -36,15 +52,16 @@ a { color: var(--accent); }
 .hero { padding: 40px 0 8px; text-align: center; }
 .hero .eyebrow {
   display: inline-block; padding: 4px 14px; border-radius: 999px;
-  background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 14px;
+  background: var(--accent-soft); color: var(--accent); font-weight: 800; font-size: 14px; letter-spacing: .08em;
+  border: 1px solid var(--line);
 }
 .hero h1 {
   font-family: var(--font-display); font-size: clamp(28px, 7vw, 40px);
-  line-height: 1.25; margin: 14px 0 12px; letter-spacing: .02em;
+  font-weight: 500; line-height: 1.35; margin: 14px 0 12px; letter-spacing: .02em;
 }
 .hero p { margin: 0 0 8px; color: var(--ink-soft); }
 .hero .deadline { margin-top: 14px; font-weight: 700; color: var(--ink); }
-.hero .deadline strong { color: var(--accent); }
+.hero .deadline strong { color: var(--pink); }
 
 .steps {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
@@ -68,10 +85,10 @@ a { color: var(--accent); }
   padding: 20px; margin: 16px 0;
 }
 .section h2 {
-  font-family: var(--font-display); font-size: 20px; margin: 0 0 4px;
+  font-family: var(--font-display); font-weight: 500; font-size: 20px; margin: 0 0 4px;
   display: flex; align-items: baseline; gap: 8px;
 }
-.section h2 .num { color: var(--accent); }
+.section h2 .num { color: var(--accent); font-family: "Nunito", sans-serif; font-weight: 900; }
 .section .hint { color: var(--ink-soft); font-size: 14px; margin: 0 0 14px; }
 
 .field { margin: 14px 0 0; }
@@ -80,7 +97,7 @@ a { color: var(--accent); }
 .field .sub { display: block; color: var(--ink-soft); font-size: 13px; margin-top: 4px; }
 input[type="text"], input[type="tel"], input[type="email"] {
   width: 100%; padding: 12px 14px; font: inherit; color: inherit;
-  background: #fffdf9; border: 1.5px solid var(--line); border-radius: 12px;
+  background: var(--field); border: 1.5px solid var(--line); border-radius: 14px;
   transition: border-color .15s, box-shadow .15s;
 }
 input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
@@ -94,7 +111,7 @@ input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px 
 .products { display: grid; gap: 12px; }
 .product {
   display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center;
-  padding: 16px; border: 1.5px solid var(--line); border-radius: 16px; background: #fffdf9;
+  padding: 16px; border: 1.5px solid var(--line); border-radius: 18px; background: var(--field);
   transition: border-color .15s, background .15s;
 }
 .product.picked { border-color: var(--accent); background: var(--accent-soft); }
@@ -102,10 +119,10 @@ input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px 
 .product .name { font-weight: 700; font-size: 17px; line-height: 1.4; }
 .product .badge {
   display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px;
-  background: var(--accent); color: var(--accent-ink); font-size: 12px; vertical-align: 2px;
+  background: var(--pink); color: #fff; font-size: 12px; font-weight: 800; vertical-align: 2px;
 }
 .product .desc { color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
-.product .price { font-weight: 700; color: var(--accent); }
+.product .price { font-weight: 800; color: var(--accent); }
 .product .info { grid-column: 1; }
 .stepper { grid-column: 2; grid-row: span 3; display: flex; align-items: center; gap: 6px; }
 .stepper button {
@@ -122,7 +139,7 @@ input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px 
 .chip input { position: absolute; opacity: 0; inset: 0; }
 .chip span {
   display: block; text-align: center; padding: 12px; border-radius: 12px; font-weight: 700;
-  border: 1.5px solid var(--line); background: #fffdf9; cursor: pointer;
+  border: 1.5px solid var(--line); background: var(--field); cursor: pointer;
 }
 .chip input:checked + span { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
 .chip input:focus-visible + span { box-shadow: 0 0 0 3px var(--accent-soft); }
@@ -141,21 +158,24 @@ input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px 
 .spacer { height: 120px; }
 .checkout {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
-  background: rgba(255, 248, 238, .94); backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, .92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   border-top: 1px solid var(--line);
   padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
 }
 .checkout .wrap { display: flex; align-items: center; gap: 12px; }
 .checkout .sum { flex: 1; min-width: 0; line-height: 1.35; }
-.checkout .sum .total { font-size: 22px; font-weight: 700; }
+.checkout .sum .total { font-size: 22px; font-weight: 800; color: var(--accent-deep); }
 .checkout .sum .break { font-size: 12px; color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .btn {
   appearance: none; border: 0; border-radius: 999px; padding: 14px 26px;
-  background: var(--accent); color: var(--accent-ink); font: 700 16px/1 var(--font);
+  background: var(--accent); color: var(--accent-ink); font: 800 16px/1 var(--font);
   cursor: pointer; white-space: nowrap; text-decoration: none; display: inline-block;
+  box-shadow: 0 5px 0 var(--accent-shadow); transition: background .2s, transform .2s;
 }
+.btn:hover:not(:disabled) { background: var(--accent-deep); transform: translateY(-2px); }
 .btn:disabled { opacity: .55; cursor: progress; }
-.btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+.btn.ghost { background: var(--card); color: var(--accent); border: 1.5px solid var(--line); box-shadow: none; }
+.btn.ghost:hover:not(:disabled) { background: var(--accent-soft); border-color: var(--accent); }
 
 .alert {
   border-radius: 12px; padding: 12px 14px; margin: 12px 0; font-size: 15px;
@@ -181,7 +201,7 @@ footer { text-align: center; color: var(--ink-soft); font-size: 13px; padding: 2
 .status-paid .status-icon { background: var(--ok-soft); color: var(--ok); }
 .status-pending .status-icon { background: var(--warn-soft); color: var(--warn); }
 .status-failed .status-icon { background: var(--err-soft); color: var(--err); }
-.status-card h1 { font-family: var(--font-display); font-size: 26px; margin: 0 0 6px; }
+.status-card h1 { font-family: var(--font-display); font-weight: 500; font-size: 26px; margin: 0 0 6px; }
 .status-card p { margin: 0; color: var(--ink-soft); }
 .pill {
   display: inline-block; padding: 2px 12px; border-radius: 999px; font-weight: 700; font-size: 14px;
