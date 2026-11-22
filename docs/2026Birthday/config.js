@@ -13,7 +13,7 @@ window.CAMPAIGN = {
   gasUrl: 'https://script.google.com/macros/s/AKfycbwJPXzM3ms6IF6wekTZsuFDMbyCONeg0RHYYXt3z1I1zkJE_P68mFmSCgKziR00hw8V/exec',
   // 開始 / 截止時間（只有前端控制，後端不鎖）。格式 'YYYY-MM-DDTHH:mm:ss+08:00'；留空 '' = 不限制
   opens: '',
-  deadline: '2026-11-22T23:59:59+08:00',
+  deadline: '',
   // 數量上限（只有前端控制，後端不鎖）：每項商品上限、整張訂單總件數上限（0 = 不限）
   // 單一商品要不同上限，在下方 products 該商品加 maxQty
   maxQty: 10,
