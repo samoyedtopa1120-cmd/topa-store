@@ -54,7 +54,7 @@ body.store::before { display: none; }
 /* ---------- 周邊按鈕 ---------- */
 .col-list { display: grid; gap: 12px; }
 .col-card {
-  --tint: #e3f5ea; --accent-c: #2f8a57; /* 販售中：綠色 */
+  --tint: #e3f5ea; --accent-c: #2f8a57; /* 通販中：綠色 */
   position: relative; display: flex; align-items: center; gap: 14px; width: 100%; padding: 12px 16px 12px 12px;
   border: 2px solid #fff; border-radius: 22px; background: #fff; color: inherit; font: inherit; text-align: left; cursor: pointer;
   box-shadow: 0 4px 16px #235c8514; transition: transform .2s, box-shadow .2s, border-color .2s;

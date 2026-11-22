@@ -49,7 +49,7 @@
     if (st === 'soon') return ['即將開放', fmtTime(c.opens) + ' 開放'];
     if (st === 'closed') return ['已截止', fmtTime(c.deadline) + ' 截止'];
     if (st === 'soldout') return ['已售完', ''];
-    return ['販售中', c.deadline ? fmtTime(c.deadline) + ' 截止' : ''];
+    return ['通販中', c.deadline ? fmtTime(c.deadline) + ' 截止' : ''];
   }
   function renderCollections() {
     const box = $('collections');
