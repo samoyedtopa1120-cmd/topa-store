@@ -1,5 +1,5 @@
 {
-  "crawledAt": "2026-11-22T15:46:29.002Z",
+  "crawledAt": "2026-11-22T16:31:32.938Z",
   "source": "https://www.myacg.com.tw/seller_market.php?seller=552667",
   "seller": {
     "id": "552667",
@@ -39,7 +39,7 @@
           "price": 1120,
           "stock": 1,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v7810855v16_NqedN_20261120200501.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v7810855v16_NqedN_20261120200501.jpg"
         },
         {
           "gid": "7819463",
@@ -47,7 +47,7 @@
           "price": 650,
           "stock": 5,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v7810855v16_NqedN_20261120200501.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v7810855v16_NqedN_20261120200501.jpg"
         },
         {
           "gid": "7819464",
@@ -55,7 +55,7 @@
           "price": 520,
           "stock": 5,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v7810855v16_NqedN_20261120200501.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v7810855v16_NqedN_20261120200501.jpg"
         }
       ],
       "priceMin": 520,
@@ -68,6 +68,7 @@
       ],
       "imageLocal": "assets/myacg/_1_202611202001451.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v7810853v39_NqedN_20261120200501.jpg",
+      "thumbnailLocal": "assets/myacg/v035_v7810853v39_NqedN_20261120200501.jpg",
       "sales": 4,
       "listPrice": "520~1120"
     },
@@ -103,7 +104,7 @@
           "price": 520,
           "stock": 10,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v7754987v51_NqedN_20261112003502.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v7754987v51_NqedN_20261112003502.jpg"
         },
         {
           "gid": "7763596",
@@ -111,7 +112,7 @@
           "price": 1120,
           "stock": 9,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v7754987v51_NqedN_20261112003502.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v7754987v51_NqedN_20261112003502.jpg"
         }
       ],
       "priceMin": 520,
@@ -124,6 +125,7 @@
       ],
       "imageLocal": "assets/myacg/7763595_1_202611120033306.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v7754986v78_NqedN_20261112003502.jpg",
+      "thumbnailLocal": "assets/myacg/v035_v7754986v78_NqedN_20261112003502.jpg",
       "sales": 1,
       "listPrice": "520~1120"
     },
@@ -159,7 +161,7 @@
           "price": 520,
           "stock": 29,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6957443v39_NqedN_20260325232501.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6957443v39_NqedN_20260325232501.jpg"
         },
         {
           "gid": "6965940",
@@ -167,7 +169,7 @@
           "price": 2000,
           "stock": 23,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6957443v39_NqedN_20260325232501.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6957443v39_NqedN_20260325232501.jpg"
         },
         {
           "gid": "6965941",
@@ -175,7 +177,7 @@
           "price": 3000,
           "stock": 12,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6957443v39_NqedN_20260325232501.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6957443v39_NqedN_20260325232501.jpg"
         }
       ],
       "priceMin": 520,
@@ -188,6 +190,7 @@
       ],
       "imageLocal": "assets/myacg/_1_202603252256408.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v6957441v1_NqedN_20260325232501.jpg",
+      "thumbnailLocal": "assets/myacg/v035_v6957441v1_NqedN_20260325232501.jpg",
       "sales": 11,
       "listPrice": "520~3000"
     },
@@ -223,7 +226,7 @@
           "price": 1000,
           "stock": 24,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg"
         },
         {
           "gid": "6805909",
@@ -231,7 +234,7 @@
           "price": 250,
           "stock": 29,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg"
         },
         {
           "gid": "6805894",
@@ -239,7 +242,7 @@
           "price": 100,
           "stock": 28,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg"
         },
         {
           "gid": "6805895",
@@ -247,7 +250,7 @@
           "price": 150,
           "stock": 22,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg"
         },
         {
           "gid": "6805896",
@@ -255,7 +258,7 @@
           "price": 350,
           "stock": 29,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg"
         },
         {
           "gid": "6805897",
@@ -263,7 +266,7 @@
           "price": 150,
           "stock": 29,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg"
         },
         {
           "gid": "6805898",
@@ -271,7 +274,7 @@
           "price": 100,
           "stock": 30,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg"
         },
         {
           "gid": "6805899",
@@ -279,7 +282,7 @@
           "price": 200,
           "stock": 29,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg"
         }
       ],
       "priceMin": 100,
@@ -292,6 +295,7 @@
       ],
       "imageLocal": "assets/myacg/_1_202602061257127.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v6797410v91_NqedN_20260206130001.jpg",
+      "thumbnailLocal": "assets/myacg/v035_v6797410v91_NqedN_20260206130001.jpg",
       "sales": 20,
       "listPrice": "100~1000"
     },
@@ -329,7 +333,7 @@
           "price": 1500,
           "stock": 1,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6431392v21_NqedN_20251129154502.jpg"
         },
         {
           "gid": "6436631",
@@ -337,7 +341,7 @@
           "price": 520,
           "stock": 7,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6431392v21_NqedN_20251129154502.jpg"
         },
         {
           "gid": "6436633",
@@ -345,7 +349,7 @@
           "price": 200,
           "stock": 14,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6431392v21_NqedN_20251129154502.jpg"
         },
         {
           "gid": "6439845",
@@ -353,7 +357,7 @@
           "price": 520,
           "stock": 0,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v6431392v21_NqedN_20251129154502.jpg"
         }
       ],
       "priceMin": 200,
@@ -368,6 +372,7 @@
       ],
       "imageLocal": "assets/myacg/_1_202510241909451.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v6428177v11_NqedN_20251129154502.jpg",
+      "thumbnailLocal": "assets/myacg/v035_v6428177v11_NqedN_20251129154502.jpg",
       "sales": 29,
       "listPrice": "200~1500"
     },
@@ -406,7 +411,7 @@
           "price": 200,
           "stock": 15,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg"
         },
         {
           "gid": "5979744",
@@ -414,7 +419,7 @@
           "price": 200,
           "stock": 15,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg"
         },
         {
           "gid": "5979745",
@@ -422,7 +427,7 @@
           "price": 200,
           "stock": 15,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg"
         },
         {
           "gid": "5979746",
@@ -430,7 +435,7 @@
           "price": 200,
           "stock": 15,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg"
         },
         {
           "gid": "5979748",
@@ -438,7 +443,7 @@
           "price": 100,
           "stock": 19,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg"
         },
         {
           "gid": "5979749",
@@ -446,7 +451,7 @@
           "price": 180,
           "stock": 12,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg"
         },
         {
           "gid": "5982146",
@@ -454,7 +459,7 @@
           "price": 1000,
           "stock": 1,
           "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
-          "imageLocal": null
+          "imageLocal": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg"
         }
       ],
       "priceMin": 100,
@@ -470,6 +475,7 @@
       ],
       "imageLocal": "assets/myacg/_1_202506181912242.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v5971512v0_NqedN_20250619141001.jpg",
+      "thumbnailLocal": "assets/myacg/v035_v5971512v0_NqedN_20250619141001.jpg",
       "sales": 13,
       "listPrice": "100~1000"
     },
@@ -520,6 +526,7 @@
       ],
       "imageLocal": "assets/myacg/5903455_1_202505282131184.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v5895245v68_NqedN_20250528213501.jpg",
+      "thumbnailLocal": "assets/myacg/v035_v5895245v68_NqedN_20250528213501.jpg",
       "sales": 6,
       "listPrice": "200"
     }

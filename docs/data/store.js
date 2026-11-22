@@ -57,7 +57,7 @@ window.STORE = {
           "desc": "厚壓克力磚＋親簽明信片＋大滑鼠墊",
           "price": 1120,
           "badge": "套組",
-          "image": "",
+          "image": "assets/myacg/v035_v7810855v16_NqedN_20261120200501.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -68,7 +68,7 @@ window.STORE = {
           "desc": "雙層印刷厚壓克力磚（15×10×2cm）",
           "price": 650,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v7810855v16_NqedN_20261120200501.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -79,7 +79,7 @@ window.STORE = {
           "desc": "大滑鼠墊（700×400×4mm）",
           "price": 520,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v7810855v16_NqedN_20261120200501.jpg",
           "soldOut": false,
           "maxQty": 0
         }
@@ -108,7 +108,7 @@ window.STORE = {
           "desc": "",
           "price": 520,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v7754987v51_NqedN_20261112003502.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -119,7 +119,7 @@ window.STORE = {
           "desc": "",
           "price": 1120,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v7754987v51_NqedN_20261112003502.jpg",
           "soldOut": false,
           "maxQty": 0
         }
@@ -148,7 +148,7 @@ window.STORE = {
           "desc": "",
           "price": 520,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6957443v39_NqedN_20260325232501.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -159,7 +159,7 @@ window.STORE = {
           "desc": "",
           "price": 2000,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6957443v39_NqedN_20260325232501.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -170,7 +170,7 @@ window.STORE = {
           "desc": "",
           "price": 3000,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6957443v39_NqedN_20260325232501.jpg",
           "soldOut": false,
           "maxQty": 0
         }
@@ -199,7 +199,7 @@ window.STORE = {
           "desc": "",
           "price": 1000,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -210,7 +210,7 @@ window.STORE = {
           "desc": "",
           "price": 250,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -221,7 +221,7 @@ window.STORE = {
           "desc": "",
           "price": 100,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -232,7 +232,7 @@ window.STORE = {
           "desc": "",
           "price": 150,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -243,7 +243,7 @@ window.STORE = {
           "desc": "",
           "price": 350,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -254,7 +254,7 @@ window.STORE = {
           "desc": "",
           "price": 150,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -265,7 +265,7 @@ window.STORE = {
           "desc": "",
           "price": 100,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -276,7 +276,7 @@ window.STORE = {
           "desc": "",
           "price": 200,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6797416v54_NqedN_20260206130002.jpg",
           "soldOut": false,
           "maxQty": 0
         }
@@ -307,7 +307,7 @@ window.STORE = {
           "desc": "",
           "price": 1500,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6431392v21_NqedN_20251129154502.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -318,7 +318,7 @@ window.STORE = {
           "desc": "",
           "price": 520,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6431392v21_NqedN_20251129154502.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -329,7 +329,7 @@ window.STORE = {
           "desc": "",
           "price": 200,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6431392v21_NqedN_20251129154502.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -340,7 +340,7 @@ window.STORE = {
           "desc": "",
           "price": 520,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v6431392v21_NqedN_20251129154502.jpg",
           "soldOut": true,
           "maxQty": 0
         }
@@ -372,7 +372,7 @@ window.STORE = {
           "desc": "",
           "price": 200,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -383,7 +383,7 @@ window.STORE = {
           "desc": "",
           "price": 200,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -394,7 +394,7 @@ window.STORE = {
           "desc": "",
           "price": 200,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -405,7 +405,7 @@ window.STORE = {
           "desc": "",
           "price": 200,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -416,7 +416,7 @@ window.STORE = {
           "desc": "",
           "price": 100,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -427,7 +427,7 @@ window.STORE = {
           "desc": "",
           "price": 180,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg",
           "soldOut": false,
           "maxQty": 0
         },
@@ -438,7 +438,7 @@ window.STORE = {
           "desc": "",
           "price": 1000,
           "badge": "",
-          "image": "",
+          "image": "assets/myacg/v035_v5973915v37_NqedN_20250619141001.jpg",
           "soldOut": false,
           "maxQty": 0
         }

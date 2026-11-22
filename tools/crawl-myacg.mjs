@@ -7,7 +7,7 @@
 //   node tools/crawl-myacg.mjs --out path.json --limit 2
 //   node tools/crawl-myacg.mjs --no-images        # 不下載圖片
 //
-// 圖片會下載到 docs/assets/myacg/（檔名沿用買動漫的檔名，已存在就不重抓），
+// 所有圖片（商品圖庫、賣場縮圖、規格圖）都會下載到 docs/assets/myacg/（檔名沿用買動漫的檔名，已存在就不重抓），
 // 商品資料裡的 imageLocal 是相對於網站根目錄的路徑。
 //
 // 禮貌規則：
@@ -253,7 +253,7 @@ async function crawlProduct(gid) {
   p.totalStock = variants.reduce((a, v) => a + (Number(v.stock) || 0), 0);
   p.soldOut = p.totalStock === 0;
 
-  // 圖片：主圖一定下載；規格圖只有在各規格圖片不同時才有意義
+  // 圖片：商品圖庫全部下載
   if (!p.images.length && p.image) p.images = [p.image];
   p.imagesLocal = [];
   for (const url of p.images) {
@@ -261,9 +261,9 @@ async function crawlProduct(gid) {
     if (local) p.imagesLocal.push(local);
   }
   p.imageLocal = p.imagesLocal[0] || null;
-  const distinct = new Set(variants.map((v) => v.image).filter(Boolean));
+  // 規格圖：全部備份一份（是否在網頁上顯示由 build-site 決定）
   for (const v of variants) {
-    v.imageLocal = distinct.size > 1 && v.image ? await downloadImage(v.image).catch(() => null) : null;
+    v.imageLocal = v.image ? await downloadImage(v.image).catch((err) => { log(err.message); return null; }) : null;
   }
   return p;
 }
@@ -283,7 +283,8 @@ async function main() {
   for (const item of list) {
     try {
       const p = await crawlProduct(item.gid);
-      products.push({ ...p, thumbnail: item.thumbnail || null, sales: item.sales, listPrice: item.listPrice });
+      const thumbnailLocal = await downloadImage(item.thumbnail).catch((err) => { log(err.message); return null; });
+      products.push({ ...p, thumbnail: item.thumbnail || null, thumbnailLocal, sales: item.sales, listPrice: item.listPrice });
       log(`✓ ${item.gid} ${p.title}（${p.variants.length} 個規格）`);
     } catch (err) {
       errors.push({ gid: item.gid, error: err.message });
