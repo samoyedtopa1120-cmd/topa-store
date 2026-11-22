@@ -315,6 +315,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  log('失敗：', err.message);
+  log('失敗：', err.message, err.cause ? `（${err.cause.code || ''} ${err.cause.message || err.cause}）` : '');
   process.exit(1);
 });
