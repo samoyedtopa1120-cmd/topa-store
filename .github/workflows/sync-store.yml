@@ -1,10 +1,17 @@
-# 依 site/store.json 與 docs/data/myacg-products.json 重新產生網站資料。
-#   - 買動漫擋海外機房 IP，GitHub 連不到，所以「爬買動漫」改在 Mac 上每天跑（tools/mac-sync/）
-#   - 這個 Action 只負責：有人修改 site/store.json 或產生器時，自動重新產生並 commit
-#   - 也可以在 Actions 分頁手動按 Run workflow
+# 同步買動漫商品並重新產生網站資料。
+#
+#   - 每天台灣時間 05:00、13:00 自動執行，也可以在 Actions 分頁手動按 Run workflow
+#   - 買動漫擋海外 / 雲端機房的 IP（GitHub、Google 都連不到），所以「爬買動漫」這個工作
+#     指定在台灣網路的 Mac 上執行（self-hosted runner，標籤 myacg）。Mac 沒開時工作會排隊等它上線。
+#   - 有人修改 site/store.json 或產生器時，只重新產生網站資料（在 GitHub 的機器上跑，不需要 Mac）
+#
+# 安全：這個 workflow 不使用 pull_request 觸發，外人的 PR 不會在 Mac 上執行。
 name: 同步商品
 
 on:
+  schedule:
+    - cron: '0 21 * * *'   # UTC 21:00 = 台灣 05:00
+    - cron: '0 5 * * *'    # UTC 05:00 = 台灣 13:00
   workflow_dispatch:
   push:
     branches: [main]
@@ -21,15 +28,21 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  sync:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
+  # 排程 / 手動：在 Mac 上爬買動漫 → 產生 → 測試 → 推送
+  crawl:
+    if: github.event_name != 'push'
+    runs-on: [self-hosted, macOS, myacg]
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+
+      - name: 爬買動漫
+        # 結束碼 2 = 部分商品失敗但已寫入其餘資料，照樣繼續
+        run: node tools/crawl-myacg.mjs || [ $? -eq 2 ]
 
       - name: 產生網站資料
         run: node tools/build-site.mjs
@@ -52,7 +65,45 @@ jobs:
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
-      # Action 用 GITHUB_TOKEN 推送時不一定會觸發 Pages 重新部署，這裡主動請求一次
+      - name: 重新部署 GitHub Pages
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "請求 Pages 重新部署失敗（可忽略，下次推送時會更新）"
+
+  # 修改 site/store.json 時：只重新產生（GitHub 的機器即可）
+  build:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 產生網站資料
+        run: node tools/build-site.mjs
+
+      - name: 測試
+        run: npm test
+
+      - name: 有變動就 commit
+        id: commit
+        run: |
+          git add docs/data
+          if git diff --cached --quiet; then
+            echo "沒有變動"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "依 site/store.json 重新產生網站資料"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
       - name: 重新部署 GitHub Pages
         if: steps.commit.outputs.changed == 'true'
         env:
