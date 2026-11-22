@@ -1,0 +1,60 @@
+{
+  "$說明": "商店設定（唯一需要手動維護的檔案）。商品名稱、規格、價格、說明、圖片每天自動從買動漫同步；這裡只放買動漫沒有的設定。改完存檔後 GitHub Action 會自動重新產生網站資料。欄位說明見 README「操作說明書」。",
+
+  "site": {
+    "baseUrl": "https://samoyedtopa1120-cmd.github.io/topa-store",
+    "gasUrl": "https://script.google.com/macros/s/AKfycbwJPXzM3ms6IF6wekTZsuFDMbyCONeg0RHYYXt3z1I1zkJE_P68mFmSCgKziR00hw8V/exec"
+  },
+
+  "store": {
+    "id": "store",
+    "title": "多帕周邊",
+    "orderPrefix": "TOPA",
+    "paymentMode": "aio",
+    "donateUrl": "https://payment.ecpay.com.tw/Broadcaster/Donate/85C7382313C1128C863B7826B020375C",
+    "atmExpireDays": 1,
+    "cvsExpireMinutes": 1440,
+    "ignorePayment": "BARCODE",
+    "shipping": [
+      { "name": "7-11店到店", "type": "超商", "fee": 60 },
+      { "name": "全家店到店", "type": "超商", "fee": 60 }
+    ],
+    "freeShippingOver": 0,
+    "maxQty": 10,
+    "maxTotal": 0,
+    "soldOutWhenMyacgEmpty": true,
+    "notes": [
+      "不同周邊可以一起下單，運費只收一次。",
+      "送出後會直接前往綠界付款。選擇 ATM 或超商代碼者，繳費期限為 **1 天**，請於期限內完成付款，逾期視同訂單不成立。",
+      "預購商品會在各周邊製作完成後一起出貨。",
+      "有任何疑問可透過 Email、DC 等方式向多帕提出。",
+      "商品尺寸可能因為印製有些微誤差。"
+    ],
+    "agreeText": "同意啦哪次不同意！（已閱讀並接受以上內容）",
+    "footer": "謝謝大家的支持！汪汪汪汪汪",
+    "questions": [],
+    "note": null
+  },
+
+  "collections": [
+    {
+      "myacgGid": 7819462,
+      "title": "多帕 2026 生日周邊",
+      "summary": "厚壓克力磚、大滑鼠墊、親簽明信片",
+      "heroImage": "2026Birthday/img/key-visual.jpg",
+      "deadline": "2026-11-22T23:59:59+08:00",
+      "variants": {
+        "7819462": { "sku": "BDAY-SET", "name": "生日快樂之我全都要", "desc": "厚壓克力磚＋親簽明信片＋大滑鼠墊", "badge": "套組" },
+        "7819463": { "sku": "ACRYLIC", "name": "防身武器好安心", "desc": "雙層印刷厚壓克力磚（15×10×2cm）" },
+        "7819464": { "sku": "MOUSEPAD", "name": "滑鼠也滑狗", "desc": "大滑鼠墊（700×400×4mm）" }
+      },
+      "legacyCampaign": { "id": "2026Birthday", "orderPrefix": "TB26" }
+    },
+    { "myacgGid": 7763595, "title": "二周年：食虫植物贊助", "summary": "食虫植物 cover 贊助回饋周邊" },
+    { "myacgGid": 6965939, "title": "《多魚的我們》原創曲應援", "summary": "多魚組合原創曲應援周邊" },
+    { "myacgGid": 6805893, "title": "FF46 周邊場後通販", "summary": "新刊、資料夾、立牌、紅包袋" },
+    { "myacgGid": 6436630, "title": "2025 一周年紀念周邊", "summary": "壓克力裝飾畫、徽章、透卡、杯墊" },
+    { "myacgGid": 5979743, "title": "薩摩耶大量發生中", "summary": "壓克力吊飾、酒精瓶、防水貼紙" },
+    { "myacgGid": 5903455, "title": "多毛冰淇淋搖搖立牌", "summary": "多帕 x 毛毛吃冰淇淋" }
+  ]
+}

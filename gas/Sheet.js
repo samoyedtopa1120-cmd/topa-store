@@ -79,24 +79,9 @@ function asText_(s) {
   return s ? "'" + s : '';
 }
 
-/** 讀取上架中的商品，回傳 { bySku, list }（list 依排序欄位）。 */
+/** 活動的商品（來自商品目錄），回傳 { bySku, list }。 */
 function readProducts_(campaign) {
-  var list = readTable_(sheet_(PRODUCT_SHEET)).rows
-    .filter(function (r) {
-      return String(r['活動代碼'] || '').trim() === campaign.id &&
-        String(r['商品代碼'] || '').trim() && isOn_(r['上架'], false);
-    })
-    .map(function (r) {
-      return {
-        sku: String(r['商品代碼']).trim(),
-        name: String(r['商品名稱'] || '').trim(),
-        desc: String(r['內容'] || '').trim(),
-        price: Number(r['單價']),
-        order: Number(r['排序']) || 0
-      };
-    })
-    .filter(function (p) { return p.name && p.price >= 0 && isFinite(p.price); })
-    .sort(function (a, b) { return a.order - b.order; });
+  var list = campaign.products || [];
   var bySku = {};
   list.forEach(function (p) { bySku[p.sku] = p; });
   return { bySku: bySku, list: list };

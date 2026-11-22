@@ -1,5 +1,5 @@
 {
-  "crawledAt": "2026-11-22T14:59:00.060Z",
+  "crawledAt": "2026-11-22T15:14:07.292Z",
   "source": "https://www.myacg.com.tw/seller_market.php?seller=552667",
   "seller": {
     "id": "552667",
@@ -35,21 +35,24 @@
           "name": "大套組",
           "price": 1120,
           "stock": 1,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7810855v16_NqedN_20261120200501.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7810855v16_NqedN_20261120200501.jpg",
+          "imageLocal": null
         },
         {
           "gid": "7819463",
           "name": "厚壓克力磚",
           "price": 650,
           "stock": 5,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7810855v16_NqedN_20261120200501.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7810855v16_NqedN_20261120200501.jpg",
+          "imageLocal": null
         },
         {
           "gid": "7819464",
           "name": "大滑鼠墊",
           "price": 520,
           "stock": 5,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7810855v16_NqedN_20261120200501.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7810855v16_NqedN_20261120200501.jpg",
+          "imageLocal": null
         }
       ],
       "priceMin": 520,
@@ -57,6 +60,7 @@
       "priceRange": "520~1120",
       "totalStock": 11,
       "soldOut": false,
+      "imageLocal": "assets/myacg/_1_202611202001451.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v7810853v39_NqedN_20261120200501.jpg",
       "sales": 4,
       "listPrice": "520~1120"
@@ -89,14 +93,16 @@
           "name": "小豬籠草",
           "price": 520,
           "stock": 10,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7754987v51_NqedN_20261112003502.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7754987v51_NqedN_20261112003502.jpg",
+          "imageLocal": null
         },
         {
           "gid": "7763596",
           "name": "大捕蠅草",
           "price": 1120,
           "stock": 9,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7754987v51_NqedN_20261112003502.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7754987v51_NqedN_20261112003502.jpg",
+          "imageLocal": null
         }
       ],
       "priceMin": 520,
@@ -104,6 +110,7 @@
       "priceRange": "520~1120",
       "totalStock": 19,
       "soldOut": false,
+      "imageLocal": "assets/myacg/7763595_1_202611120033306.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v7754986v78_NqedN_20261112003502.jpg",
       "sales": 1,
       "listPrice": "520~1120"
@@ -136,21 +143,24 @@
           "name": "小小打CALL",
           "price": 520,
           "stock": 29,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6957443v39_NqedN_20260325232501.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6957443v39_NqedN_20260325232501.jpg",
+          "imageLocal": null
         },
         {
           "gid": "6965940",
           "name": "大大的LOVE",
           "price": 2000,
           "stock": 23,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6957443v39_NqedN_20260325232501.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6957443v39_NqedN_20260325232501.jpg",
+          "imageLocal": null
         },
         {
           "gid": "6965941",
           "name": "特別的LOVE",
           "price": 3000,
           "stock": 12,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6957443v39_NqedN_20260325232501.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6957443v39_NqedN_20260325232501.jpg",
+          "imageLocal": null
         }
       ],
       "priceMin": 520,
@@ -158,6 +168,7 @@
       "priceRange": "520~3000",
       "totalStock": 64,
       "soldOut": false,
+      "imageLocal": "assets/myacg/_1_202603252256408.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v6957441v1_NqedN_20260325232501.jpg",
       "sales": 11,
       "listPrice": "520~3000"
@@ -190,56 +201,64 @@
           "name": "新刊套組",
           "price": 1000,
           "stock": 24,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
+          "imageLocal": null
         },
         {
           "gid": "6805909",
           "name": "新刊",
           "price": 250,
           "stock": 29,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
+          "imageLocal": null
         },
         {
           "gid": "6805894",
           "name": "A4資料夾",
           "price": 100,
           "stock": 28,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
+          "imageLocal": null
         },
         {
           "gid": "6805895",
           "name": "氣泡飲飯友",
           "price": 150,
           "stock": 22,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
+          "imageLocal": null
         },
         {
           "gid": "6805896",
           "name": "冬季立牌",
           "price": 350,
           "stock": 29,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
+          "imageLocal": null
         },
         {
           "gid": "6805897",
           "name": "女僕串鍊吊飾",
           "price": 150,
           "stock": 29,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
+          "imageLocal": null
         },
         {
           "gid": "6805898",
           "name": "紅包袋_2入",
           "price": 100,
           "stock": 30,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
+          "imageLocal": null
         },
         {
           "gid": "6805899",
           "name": "紅包袋_5入",
           "price": 200,
           "stock": 29,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg",
+          "imageLocal": null
         }
       ],
       "priceMin": 100,
@@ -247,6 +266,7 @@
       "priceRange": "100~1000",
       "totalStock": 220,
       "soldOut": false,
+      "imageLocal": "assets/myacg/_1_202602061257127.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v6797410v91_NqedN_20260206130001.jpg",
       "sales": 20,
       "listPrice": "100~1000"
@@ -279,28 +299,32 @@
           "name": "大套組",
           "price": 1500,
           "stock": 1,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg",
+          "imageLocal": null
         },
         {
           "gid": "6436631",
           "name": "小套組",
           "price": 520,
           "stock": 7,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg",
+          "imageLocal": null
         },
         {
           "gid": "6436633",
           "name": "單購杯墊",
           "price": 200,
           "stock": 14,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg",
+          "imageLocal": null
         },
         {
           "gid": "6439845",
           "name": "滑鼠墊售完",
           "price": 520,
           "stock": 0,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg",
+          "imageLocal": null
         }
       ],
       "priceMin": 200,
@@ -308,6 +332,7 @@
       "priceRange": "200~1500",
       "totalStock": 22,
       "soldOut": false,
+      "imageLocal": "assets/myacg/_1_202510241909451.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v6428177v11_NqedN_20251129154502.jpg",
       "sales": 29,
       "listPrice": "200~1500"
@@ -340,49 +365,56 @@
           "name": "壓克力吊飾 A款",
           "price": 200,
           "stock": 15,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
+          "imageLocal": null
         },
         {
           "gid": "5979744",
           "name": "壓克力吊飾 B款",
           "price": 200,
           "stock": 15,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
+          "imageLocal": null
         },
         {
           "gid": "5979745",
           "name": "壓克力吊飾 C款",
           "price": 200,
           "stock": 15,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
+          "imageLocal": null
         },
         {
           "gid": "5979746",
           "name": "壓克力吊飾 D款",
           "price": 200,
           "stock": 15,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
+          "imageLocal": null
         },
         {
           "gid": "5979748",
           "name": "酒精瓶",
           "price": 100,
           "stock": 19,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
+          "imageLocal": null
         },
         {
           "gid": "5979749",
           "name": "防水貼紙 一包4款",
           "price": 180,
           "stock": 12,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
+          "imageLocal": null
         },
         {
           "gid": "5982146",
           "name": "我全都要",
           "price": 1000,
           "stock": 1,
-          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg",
+          "imageLocal": null
         }
       ],
       "priceMin": 100,
@@ -390,6 +422,7 @@
       "priceRange": "100~1000",
       "totalStock": 92,
       "soldOut": false,
+      "imageLocal": "assets/myacg/_1_202506181912242.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v5971512v0_NqedN_20250619141001.jpg",
       "sales": 13,
       "listPrice": "100~1000"
@@ -422,7 +455,8 @@
           "name": "",
           "price": 200,
           "stock": 14,
-          "image": null
+          "image": null,
+          "imageLocal": null
         }
       ],
       "priceMin": 200,
@@ -430,6 +464,7 @@
       "priceRange": "200",
       "totalStock": 14,
       "soldOut": false,
+      "imageLocal": "assets/myacg/5903455_1_202505282131184.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v5895245v68_NqedN_20250528213501.jpg",
       "sales": 6,
       "listPrice": "200"

@@ -1,7 +1,7 @@
 /**
  * 第一次使用：在 Apps Script 編輯器選 setup 後按「執行」，授權後會：
  *   1. 使用此指令碼所屬的試算表（若是獨立專案則新建一份「多帕周邊訂單」）
- *   2. 建立「活動設定」「運送方式」「商品」「訂單」「綠界通知紀錄」工作表（所有活動共用）
+ *   2. 建立「訂單」「綠界通知紀錄」工作表（商品與價格在網站的 data/catalog.json）
  *   3. 設定預設指令碼屬性（測試環境）
  * 可重複執行，不會覆蓋既有資料。程式更新欄位後，網頁應用程式也會在下一次請求時自動補上。
  */
@@ -37,6 +37,19 @@ function setWebAppUrl(url) {
   console.log('WEBAPP_URL = ' + url);
 }
 
+/**
+ * 授權並測試讀取商品目錄：第一次使用「讀取外部網址」權限時，在編輯器選這個函式按「執行」並授權。
+ */
+function testCatalog() {
+  CacheService.getScriptCache().removeAll(['catalog', 'catalog_backup']);
+  try {
+    var all = allCampaigns_();
+    console.log('商品目錄讀取成功：' + all.map(function (c) { return c.id + '（' + c.products.length + ' 個商品）'; }).join('、'));
+  } catch (err) {
+    console.log('已授權，但目前讀不到商品目錄（網站可能還沒更新）：' + err.message);
+  }
+}
+
 /** 檢查目前設定（不會顯示金鑰）。 */
 function showConfig() {
   var p = PropertiesService.getScriptProperties().getProperties();
@@ -48,6 +61,7 @@ function showConfig() {
     WEBAPP_URL: p.WEBAPP_URL || '(未設定)',
     ALLOWED_ORIGINS: p.ALLOWED_ORIGINS || DEFAULT_ALLOWED_ORIGINS,
     SPREADSHEET_ID: p.SPREADSHEET_ID || '(未設定)',
-    SCHEMA_VERSION: p.SCHEMA_VERSION || '(未建立)'
+    SCHEMA_VERSION: p.SCHEMA_VERSION || '(未建立)',
+    CATALOG_URL: p.CATALOG_URL || DEFAULT_CATALOG_URL
   }, null, 2));
 }

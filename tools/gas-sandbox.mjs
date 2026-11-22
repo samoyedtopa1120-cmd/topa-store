@@ -62,7 +62,10 @@ for (const m of ['setFrozenRows', 'setColumnWidth', 'setTabColor', 'autoResizeCo
   FakeSheet.prototype[m] = function () { return this; };
 }
 
-export function createSandbox({ props = {} } = {}) {
+export function createSandbox({ props = {}, catalog = null } = {}) {
+  // 商品目錄：UrlFetchApp 回傳這裡的內容；fetchCount 用來檢查快取
+  const remote = { catalog, status: 200, fetchCount: 0 };
+  const cacheStore = new Map();
   const sheets = new Map();
   const ss = {
     getSheetByName: (n) => sheets.get(n) || null,
@@ -119,11 +122,30 @@ export function createSandbox({ props = {} } = {}) {
         html: s, setTitle() { return this; }, addMetaTag() { return this; }, setXFrameOptionsMode() { return this; }
       })
     },
-    Logger: { log: () => {} }
+    Logger: { log: () => {} },
+    CacheService: {
+      getScriptCache: () => ({
+        get: (k) => (cacheStore.has(k) ? cacheStore.get(k) : null),
+        put: (k, v) => { cacheStore.set(k, String(v)); },
+        remove: (k) => cacheStore.delete(k),
+        removeAll: (ks) => ks.forEach((k) => cacheStore.delete(k))
+      })
+    },
+    UrlFetchApp: {
+      fetch: () => {
+        remote.fetchCount++;
+        return {
+          getResponseCode: () => remote.status,
+          getContentText: () => (remote.catalog == null ? 'not found' : JSON.stringify(remote.catalog))
+        };
+      }
+    }
   };
   vm.createContext(ctx);
   for (const f of fs.readdirSync(GAS_DIR).filter((f) => f.endsWith('.js')).sort()) {
     vm.runInContext(fs.readFileSync(path.join(GAS_DIR, f), 'utf8'), ctx, { filename: f });
   }
-  return { ctx, sheets, ss, props: store };
+  // 換目錄後清快取（模擬快取過期）
+  const setCatalog = (c) => { remote.catalog = c; cacheStore.clear(); ctx.catalogMemo_ = null; };
+  return { ctx, sheets, ss, props: store, remote, cache: cacheStore, setCatalog };
 }

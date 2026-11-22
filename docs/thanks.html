@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>訂單狀態｜多帕周邊</title>
+  <meta name="robots" content="noindex">
+  <!-- 網址含訂單查詢碼，不要透過 Referer 傳給其他網站 -->
+  <meta name="referrer" content="no-referrer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#f4faff">
+  <link rel="stylesheet" href="assets/base.css">
+</head>
+<body>
+  <main class="wrap" style="padding-top:32px">
+    <section class="section status-card" id="card">
+      <div class="spinner"></div>
+      <h1>正在確認付款結果…</h1>
+      <p>請稍候，不要關閉頁面</p>
+    </section>
+
+    <section class="section" id="pay" hidden>
+      <h2>訂單已建立！請完成付款</h2>
+      <p class="hint">到綠界付款頁時，請照下面填寫，多帕才對得到你的訂單</p>
+      <div class="copy-row">
+        <div><div class="k">贊助金額（請填這個數字）</div><div class="v" id="p-amount"></div></div>
+        <button type="button" data-copy="amount">複製</button>
+      </div>
+      <div class="copy-row">
+        <div><div class="k">留言（貼上訂單編號）</div><div class="v" id="p-order"></div></div>
+        <button type="button" data-copy="order">複製</button>
+      </div>
+      <ol class="pay-steps">
+        <li>按下方「前往綠界付款」（會開新分頁，這頁請先不要關）。</li>
+        <li><b>贊助者名稱</b>：填你的暱稱／ID。</li>
+        <li><b>贊助金額</b>：填上面的金額，請勿更改。</li>
+        <li><b>留言</b>：貼上訂單編號。</li>
+        <li>選擇付款方式完成付款，回到這頁按「我已完成付款」。</li>
+      </ol>
+      <div class="actions">
+        <a class="btn" id="p-go" target="_blank" rel="noopener">前往綠界付款</a>
+        <button class="btn ghost" type="button" id="p-done">我已完成付款</button>
+      </div>
+      <div class="note-ok" id="p-reported" hidden></div>
+      <p class="alert" id="p-err" hidden></p>
+    </section>
+
+    <section class="section" id="detail" hidden>
+      <h2>訂單明細</h2>
+      <dl class="detail">
+        <dt>訂單編號</dt><dd id="d-no"></dd>
+        <dt>狀態</dt><dd><span class="pill" id="d-status"></span></dd>
+        <dt>建立時間</dt><dd id="d-created"></dd>
+        <dt>商品</dt><dd id="d-items"></dd>
+        <dt>金額</dt><dd id="d-amount"></dd>
+        <dt>取貨</dt><dd id="d-pickup"></dd>
+        <dt>付款方式</dt><dd id="d-paytype"></dd>
+      </dl>
+      <div class="payinfo" id="payinfo" hidden>
+        <strong>繳費資訊</strong>
+        <div id="d-payinfo"></div>
+        <div id="d-expire"></div>
+      </div>
+    </section>
+
+    <p style="text-align:center;color:var(--ink-soft);font-size:14px">
+      建議把這個頁面加入書籤或截圖，之後可以用它查詢訂單狀態。
+    </p>
+    <p style="text-align:center"><a class="btn ghost" href="./">回到商店</a></p>
+    <footer>謝謝大家的支持！汪汪汪汪汪</footer>
+  </main>
+
+  <script src="data/store.js"></script>
+  <script src="assets/order-core.js"></script>
+  <script>
+  (function () {
+    'use strict';
+    const C = window.CAMPAIGN;
+    const T = window.TopaOrder;
+    const $ = (id) => document.getElementById(id);
+    const q = new URLSearchParams(location.search);
+    const orderNo = q.get('o');
+    const token = q.get('t');
+    const card = $('card');
+
+    function showCard(kind, icon, title, text) {
+      card.className = 'section status-card status-' + kind;
+      card.innerHTML = '<div class="status-icon"></div><h1></h1><p></p>';
+      card.querySelector('.status-icon').textContent = icon;
+      card.querySelector('h1').textContent = title;
+      card.querySelector('p').textContent = text;
+    }
+
+    const FAILED = { '付款失敗': ['付款沒有成功', '這筆訂單未完成付款，請回商店重新下單，或聯絡多帕。'],
+      '逾期未付': ['訂單已逾期', '超過付款期限仍未收到款項，請回商店重新下單，或聯絡多帕。'],
+      '已取消': ['訂單已取消', '這筆訂單已取消，有疑問請聯絡多帕。'],
+      '已退款': ['訂單已退款', '這筆訂單已退款，有疑問請聯絡多帕。'] };
+    let mode = C.paymentMode;
+
+    function showOrder(o) {
+      if (o.paymentMode) mode = o.paymentMode;
+      const kind = o.status === '已付款' ? 'paid' : FAILED[o.status] ? 'failed' : 'pending';
+      const donate = mode === 'donate' && kind === 'pending';
+      $('pay').hidden = !donate;
+      if (!donate) card.hidden = false;
+      if (donate) {
+        showDonate(o);
+      } else if (kind === 'paid') {
+        showCard('paid', '✓', '付款完成，謝謝支持！', '多帕收到你的訂單了，出貨後會依你選的取貨方式寄送。');
+      } else if (kind === 'failed') {
+        showCard('failed', '!', FAILED[o.status][0], FAILED[o.status][1]);
+      } else if (o.paymentInfo) {
+        showCard('pending', '…', '訂單成立，等待繳費', '請在繳費期限內完成付款，入帳後狀態會自動更新。');
+      } else {
+        showCard('pending', '…', '付款處理中', '尚未收到付款結果，請稍後重新整理此頁。');
+      }
+      document.querySelector('#detail').className = 'section status-' + kind;
+      $('detail').hidden = false;
+      $('d-no').textContent = o.orderNo;
+      $('d-status').textContent = o.status;
+      $('d-created').textContent = o.createdAt;
+      $('d-items').textContent = o.items;
+      $('d-amount').textContent = `${T.formatNT(o.amount)}（含運費 ${T.formatNT(o.shippingFee)}）`;
+      $('d-pickup').textContent = o.pickup;
+      $('d-paytype').textContent = o.paymentType || '—';
+      $('payinfo').hidden = !(kind === 'pending' && o.paymentInfo);
+      $('d-payinfo').textContent = o.paymentInfo;
+      $('d-expire').textContent = o.paymentExpire ? '繳費期限：' + o.paymentExpire : '';
+      return kind;
+    }
+
+    function showDonate(o) {
+      card.hidden = !o.reportedAt;
+      if (o.reportedAt) showCard('pending', '✓', '已收到你的付款回報', '多帕對帳確認後，狀態會改為「已付款」。');
+      $('p-amount').textContent = String(o.amount);
+      $('p-order').textContent = o.orderNo;
+      $('p-go').href = o.donateUrl || C.donateUrl;
+      $('p-done').hidden = !!o.reportedAt;
+      $('p-reported').hidden = !o.reportedAt;
+      $('p-reported').textContent = o.reportedAt
+        ? `你在 ${o.reportedAt} 回報已付款。如果還沒付款，請按「前往綠界付款」完成。` : '';
+    }
+
+    document.querySelectorAll('[data-copy]').forEach((btn) => btn.addEventListener('click', async () => {
+      const text = $(btn.dataset.copy === 'amount' ? 'p-amount' : 'p-order').textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (err) {
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); ta.remove();
+      }
+      btn.textContent = '已複製';
+      setTimeout(() => { btn.textContent = '複製'; }, 1500);
+    }));
+
+    $('p-done').addEventListener('click', async () => {
+      const btn = $('p-done');
+      btn.disabled = true;
+      $('p-err').hidden = true;
+      try {
+        const r = await T.reportPaid(C.gasUrl, C.id, orderNo, token);
+        if (!r.ok) throw new Error(r.message || '回報失敗');
+        await load(0);
+      } catch (err) {
+        $('p-err').textContent = err.message + '，請稍後再試';
+        $('p-err').hidden = false;
+        btn.disabled = false;
+      }
+    });
+
+    async function load(attempt) {
+      try {
+        const o = await T.getStatus(C.gasUrl, C.id, orderNo, token);
+        if (!o.ok) throw new Error(o.message || '查無此訂單');
+        const kind = showOrder(o);
+        // 綠界通知可能比客戶晚到幾秒，付款中且沒有繳費資訊時再查幾次（贊助頁模式不會自動回寫，不用重查）
+        if (mode !== 'donate' && kind === 'pending' && !o.paymentInfo && attempt < 8) {
+          setTimeout(() => load(attempt + 1), 2500);
+        }
+      } catch (err) {
+        if (attempt < 2) return setTimeout(() => load(attempt + 1), 2000);
+        showCard('failed', '?', '暫時查不到訂單', err.message + '。請稍後重新整理，或聯絡多帕。');
+      }
+    }
+
+    if (!orderNo || !token) {
+      showCard('failed', '?', '找不到訂單資訊', '請使用付款完成後的連結開啟此頁。');
+    } else {
+      load(0);
+    }
+  })();
+  </script>
+</body>
+</html>

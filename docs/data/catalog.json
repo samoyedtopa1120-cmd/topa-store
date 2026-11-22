@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "campaigns": {
+    "store": {
+      "id": "store",
+      "title": "多帕周邊",
+      "orderPrefix": "TOPA",
+      "paymentMode": "aio",
+      "donateUrl": "https://payment.ecpay.com.tw/Broadcaster/Donate/85C7382313C1128C863B7826B020375C",
+      "atmExpireDays": 1,
+      "cvsExpireMinutes": 1440,
+      "ignorePayment": "BARCODE",
+      "freeShippingOver": 0,
+      "shipping": [
+        {
+          "name": "7-11店到店",
+          "type": "超商",
+          "fee": 60
+        },
+        {
+          "name": "全家店到店",
+          "type": "超商",
+          "fee": 60
+        }
+      ],
+      "products": [
+        {
+          "sku": "BDAY-SET",
+          "name": "生日快樂之我全都要",
+          "price": 1120,
+          "group": "多帕 2026 生日周邊"
+        },
+        {
+          "sku": "ACRYLIC",
+          "name": "防身武器好安心",
+          "price": 650,
+          "group": "多帕 2026 生日周邊"
+        },
+        {
+          "sku": "MOUSEPAD",
+          "name": "滑鼠也滑狗",
+          "price": 520,
+          "group": "多帕 2026 生日周邊"
+        },
+        {
+          "sku": "G7763595",
+          "name": "小豬籠草",
+          "price": 520,
+          "group": "二周年：食虫植物贊助"
+        },
+        {
+          "sku": "G7763596",
+          "name": "大捕蠅草",
+          "price": 1120,
+          "group": "二周年：食虫植物贊助"
+        },
+        {
+          "sku": "G6965939",
+          "name": "小小打CALL",
+          "price": 520,
+          "group": "《多魚的我們》原創曲應援"
+        },
+        {
+          "sku": "G6965940",
+          "name": "大大的LOVE",
+          "price": 2000,
+          "group": "《多魚的我們》原創曲應援"
+        },
+        {
+          "sku": "G6965941",
+          "name": "特別的LOVE",
+          "price": 3000,
+          "group": "《多魚的我們》原創曲應援"
+        },
+        {
+          "sku": "G6805893",
+          "name": "新刊套組",
+          "price": 1000,
+          "group": "FF46 周邊場後通販"
+        },
+        {
+          "sku": "G6805909",
+          "name": "新刊",
+          "price": 250,
+          "group": "FF46 周邊場後通販"
+        },
+        {
+          "sku": "G6805894",
+          "name": "A4資料夾",
+          "price": 100,
+          "group": "FF46 周邊場後通販"
+        },
+        {
+          "sku": "G6805895",
+          "name": "氣泡飲飯友",
+          "price": 150,
+          "group": "FF46 周邊場後通販"
+        },
+        {
+          "sku": "G6805896",
+          "name": "冬季立牌",
+          "price": 350,
+          "group": "FF46 周邊場後通販"
+        },
+        {
+          "sku": "G6805897",
+          "name": "女僕串鍊吊飾",
+          "price": 150,
+          "group": "FF46 周邊場後通販"
+        },
+        {
+          "sku": "G6805898",
+          "name": "紅包袋_2入",
+          "price": 100,
+          "group": "FF46 周邊場後通販"
+        },
+        {
+          "sku": "G6805899",
+          "name": "紅包袋_5入",
+          "price": 200,
+          "group": "FF46 周邊場後通販"
+        },
+        {
+          "sku": "G6436630",
+          "name": "大套組",
+          "price": 1500,
+          "group": "2025 一周年紀念周邊"
+        },
+        {
+          "sku": "G6436631",
+          "name": "小套組",
+          "price": 520,
+          "group": "2025 一周年紀念周邊"
+        },
+        {
+          "sku": "G6436633",
+          "name": "單購杯墊",
+          "price": 200,
+          "group": "2025 一周年紀念周邊"
+        },
+        {
+          "sku": "G6439845",
+          "name": "滑鼠墊售完",
+          "price": 520,
+          "group": "2025 一周年紀念周邊"
+        },
+        {
+          "sku": "G5979743",
+          "name": "壓克力吊飾 A款",
+          "price": 200,
+          "group": "薩摩耶大量發生中"
+        },
+        {
+          "sku": "G5979744",
+          "name": "壓克力吊飾 B款",
+          "price": 200,
+          "group": "薩摩耶大量發生中"
+        },
+        {
+          "sku": "G5979745",
+          "name": "壓克力吊飾 C款",
+          "price": 200,
+          "group": "薩摩耶大量發生中"
+        },
+        {
+          "sku": "G5979746",
+          "name": "壓克力吊飾 D款",
+          "price": 200,
+          "group": "薩摩耶大量發生中"
+        },
+        {
+          "sku": "G5979748",
+          "name": "酒精瓶",
+          "price": 100,
+          "group": "薩摩耶大量發生中"
+        },
+        {
+          "sku": "G5979749",
+          "name": "防水貼紙 一包4款",
+          "price": 180,
+          "group": "薩摩耶大量發生中"
+        },
+        {
+          "sku": "G5982146",
+          "name": "我全都要",
+          "price": 1000,
+          "group": "薩摩耶大量發生中"
+        },
+        {
+          "sku": "G5903455",
+          "name": "多毛冰淇淋搖搖立牌",
+          "price": 200,
+          "group": "多毛冰淇淋搖搖立牌"
+        }
+      ]
+    },
+    "2026Birthday": {
+      "id": "2026Birthday",
+      "title": "多帕 2026 生日周邊",
+      "orderPrefix": "TB26",
+      "paymentMode": "aio",
+      "donateUrl": "https://payment.ecpay.com.tw/Broadcaster/Donate/85C7382313C1128C863B7826B020375C",
+      "atmExpireDays": 1,
+      "cvsExpireMinutes": 1440,
+      "ignorePayment": "BARCODE",
+      "freeShippingOver": 0,
+      "shipping": [
+        {
+          "name": "7-11店到店",
+          "type": "超商",
+          "fee": 60
+        },
+        {
+          "name": "全家店到店",
+          "type": "超商",
+          "fee": 60
+        }
+      ],
+      "products": [
+        {
+          "sku": "BDAY-SET",
+          "name": "生日快樂之我全都要",
+          "price": 1120,
+          "group": ""
+        },
+        {
+          "sku": "ACRYLIC",
+          "name": "防身武器好安心",
+          "price": 650,
+          "group": ""
+        },
+        {
+          "sku": "MOUSEPAD",
+          "name": "滑鼠也滑狗",
+          "price": 520,
+          "group": ""
+        }
+      ]
+    }
+  }
+}

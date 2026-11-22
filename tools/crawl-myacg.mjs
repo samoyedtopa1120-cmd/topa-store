@@ -5,6 +5,10 @@
 //   node tools/crawl-myacg.mjs --seller 552667
 //   node tools/crawl-myacg.mjs --gid 7819462       # 只給商品編號，自動找出賣家
 //   node tools/crawl-myacg.mjs --out path.json --limit 2
+//   node tools/crawl-myacg.mjs --no-images        # 不下載圖片
+//
+// 圖片會下載到 docs/assets/myacg/（檔名沿用買動漫的檔名，已存在就不重抓），
+// 商品資料裡的 imageLocal 是相對於網站根目錄的路徑。
 //
 // 禮貌規則：
 //   - 先讀 robots.txt，只抓允許的路徑，請求間隔 = max(Crawl-delay, 5) 秒
@@ -22,6 +26,8 @@ const args = parseArgs(process.argv.slice(2));
 const OUT = path.resolve(ROOT, args.out || 'docs/data/myacg-products.json');
 const LIMIT = Number(args.limit) || Infinity;
 const MIN_DELAY_MS = 5000;
+const IMAGE_DIR = path.join(ROOT, 'docs/assets/myacg');
+const DOWNLOAD_IMAGES = !args['no-images'];
 
 // ---------------------------------------------------------------- 工具
 
@@ -117,6 +123,25 @@ async function request(url, { method = 'GET', body, referer, json = false } = {}
       log('重試', u.pathname, err.message);
     }
   }
+}
+
+/** 下載圖片到 docs/assets/myacg/；已存在就略過。回傳相對網站根目錄的路徑。 */
+async function downloadImage(url) {
+  if (!url || /gt_good_no_pic|g_diable/.test(url)) return null;
+  const name = path.basename(new URL(url).pathname).replace(/[^A-Za-z0-9._-]/g, '_');
+  const dest = path.join(IMAGE_DIR, name);
+  const rel = 'assets/myacg/' + name;
+  if (fs.existsSync(dest)) return rel;
+  if (!DOWNLOAD_IMAGES) return null;
+  const wait = lastRequest + delayMs - Date.now();
+  if (wait > 0) await sleep(wait);
+  lastRequest = Date.now();
+  const res = await fetch(url, { headers: { 'User-Agent': UA, Referer: BASE + '/' }, signal: AbortSignal.timeout(60000) });
+  if (!res.ok || !/^image\//.test(res.headers.get('content-type') || '')) throw new Error(`圖片下載失敗 ${res.status}：${url}`);
+  fs.mkdirSync(IMAGE_DIR, { recursive: true });
+  fs.writeFileSync(dest, Buffer.from(await res.arrayBuffer()));
+  log('下載圖片', rel);
+  return rel;
 }
 
 // ---------------------------------------------------------------- 賣場清單
@@ -225,6 +250,13 @@ async function crawlProduct(gid) {
   p.priceRange = p.priceMin == null ? null : p.priceMin === p.priceMax ? String(p.priceMin) : `${p.priceMin}~${p.priceMax}`;
   p.totalStock = variants.reduce((a, v) => a + (Number(v.stock) || 0), 0);
   p.soldOut = p.totalStock === 0;
+
+  // 圖片：主圖一定下載；規格圖只有在各規格圖片不同時才有意義
+  p.imageLocal = await downloadImage(p.image).catch((err) => { log(err.message); return null; });
+  const distinct = new Set(variants.map((v) => v.image).filter(Boolean));
+  for (const v of variants) {
+    v.imageLocal = distinct.size > 1 && v.image ? await downloadImage(v.image).catch(() => null) : null;
+  }
   return p;
 }
 

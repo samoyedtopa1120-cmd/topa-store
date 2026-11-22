@@ -66,7 +66,7 @@ function campaignInfo_(id) {
     freeShippingOver: c.freeShippingOver,
     shipping: c.shipping,
     products: readProducts_(c).list.map(function (p) {
-      return { sku: p.sku, name: p.name, desc: p.desc, price: p.price };
+      return { sku: p.sku, name: p.name, group: p.group, price: p.price };
     })
   };
 }
@@ -128,7 +128,8 @@ function createOrder_(data) {
     var p = products[String(item.sku)];
     if (!p) throw userError_('INVALID', '商品已下架或不存在，請重新整理頁面');
     if (!(qty > 0 && Math.floor(qty) === qty && qty <= 1e6)) throw userError_('INVALID', '商品數量不正確');
-    lines.push({ sku: p.sku, name: p.name, price: p.price, qty: qty });
+    // 跨周邊的訂單：品名前面加上周邊名稱，方便出貨對照
+    lines.push({ sku: p.sku, name: (p.group ? '【' + p.group + '】' : '') + p.name, price: p.price, qty: qty });
     subtotal += p.price * qty;
     totalQty += qty;
   });
@@ -235,8 +236,8 @@ function extraAnswers_(raw) {
 
 /** 贊助頁模式：客戶按「我已完成付款」。只記錄回報時間，狀態維持付款中，由多帕對帳後手動改為已付款。 */
 function reportPaid_(data) {
-  var c = loadCampaign_(data.campaign);
-  if (!c || !data.orderNo || !data.token) throw userError_('NOT_FOUND', '查無此訂單');
+  var c = campaignOrDefault_(data.campaign);
+  if (!c.id || !data.orderNo || !data.token) throw userError_('NOT_FOUND', '查無此訂單');
   var lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
@@ -277,9 +278,8 @@ function handleEcpayCallback_(kind, params) {
     logCallback_(kind, params, verified);
     if (!verified) return { ok: false };
 
+    // 付款通知只靠訂單編號找訂單，不依賴商品目錄，目錄暫時讀不到也能正常收款
     var orderNo = String(params.MerchantTradeNo || '');
-    var c = campaignForOrder_(params.CustomField1, orderNo);
-    if (!c) return { ok: false };
 
     var lock = LockService.getScriptLock();
     lock.waitLock(20000);
@@ -402,8 +402,8 @@ function resultPage_(result) {
 // ---------------------------------------------------------------- 查詢訂單
 
 function orderStatus_(campaignId, orderNo, token) {
-  var c = loadCampaign_(campaignId);
-  if (!c || !orderNo || !token) throw userError_('NOT_FOUND', '查無此訂單');
+  if (!/^[A-Za-z0-9_-]{1,40}$/.test(String(campaignId || '')) || !orderNo || !token) throw userError_('NOT_FOUND', '查無此訂單');
+  var c = campaignOrDefault_(campaignId);
   var sheet = sheet_(ORDER_SHEET);
   var row = findRow_(sheet, String(orderNo));
   if (!row) throw userError_('NOT_FOUND', '查無此訂單');

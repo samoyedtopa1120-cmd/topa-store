@@ -1,71 +1,93 @@
 /**
- * 活動設定（讀試算表）、工作表結構、逾期標記。
+ * 商品目錄（docs/data/catalog.json）、工作表結構、逾期標記。
  */
+
+var catalogMemo_ = null;
+
+/**
+ * 讀商品目錄：先看快取（CATALOG_CACHE_SECONDS），過期才向 GitHub Pages 抓；
+ * 抓不到時改用 6 小時的備份快取，兩個都沒有才回錯誤。
+ */
+function catalog_() {
+  if (catalogMemo_) return catalogMemo_;
+  var cache = CacheService.getScriptCache();
+  var raw = cache.get('catalog');
+  if (!raw) {
+    try {
+      var url = PropertiesService.getScriptProperties().getProperty('CATALOG_URL') || DEFAULT_CATALOG_URL;
+      var res = UrlFetchApp.fetch(url + (url.indexOf('?') < 0 ? '?' : '&') + 't=' + Math.floor(Date.now() / 60000),
+        { muteHttpExceptions: true, followRedirects: true });
+      if (res.getResponseCode() !== 200) throw new Error('HTTP ' + res.getResponseCode());
+      raw = res.getContentText();
+      var parsed = JSON.parse(raw);
+      if (!parsed || parsed.version !== 1 || !parsed.campaigns) throw new Error('商品目錄格式不正確');
+      cache.put('catalog', raw, CATALOG_CACHE_SECONDS);
+      cache.put('catalog_backup', raw, 21600);
+    } catch (err) {
+      console.error('讀取商品目錄失敗', err && err.message);
+      raw = cache.get('catalog_backup');
+      if (!raw) throw userError_('SERVER_ERROR', '系統忙碌中（暫時讀不到商品資料），請稍後再試');
+    }
+  }
+  catalogMemo_ = JSON.parse(raw);
+  return catalogMemo_;
+}
 
 /** 讀取活動。找不到回傳 null。 */
 function loadCampaign_(id) {
   id = String(id || '').trim();
   if (!/^[A-Za-z0-9_-]{1,40}$/.test(id)) return null;
-  var row = readTable_(sheet_(CAMPAIGN_SHEET)).rows.filter(function (r) {
-    return String(r['活動代碼'] || '').trim() === id;
-  })[0];
-  return row ? campaignFromRow_(row) : null;
+  var raw = catalog_().campaigns[id];
+  return raw ? normalizeCampaign_(id, raw) : null;
 }
 
 function allCampaigns_() {
-  return readTable_(sheet_(CAMPAIGN_SHEET)).rows
-    .filter(function (r) { return /^[A-Za-z0-9_-]{1,40}$/.test(String(r['活動代碼'] || '').trim()); })
-    .map(campaignFromRow_);
+  var all = catalog_().campaigns;
+  return Object.keys(all).map(function (id) { return normalizeCampaign_(id, all[id]); });
 }
 
-/** 綠界回傳時找活動：優先用 CustomField1（活動代碼），否則比對訂單前綴。 */
-function campaignForOrder_(campaignId, orderNo) {
-  var c = loadCampaign_(campaignId);
-  if (c) return c;
-  return allCampaigns_().filter(function (x) {
-    return x.orderPrefix && String(orderNo).indexOf(x.orderPrefix) === 0;
-  })[0] || null;
+/** 不需要商品資料的地方（查詢、逾期標記）用：讀不到目錄時退回預設值，不影響收款流程。 */
+function campaignOrDefault_(id) {
+  try {
+    var c = loadCampaign_(id);
+    if (c) return c;
+  } catch (err) {
+    console.error('campaignOrDefault_', err && err.message);
+  }
+  return { id: String(id || ''), paymentMode: 'aio', donateUrl: '', shipping: [], products: [] };
 }
 
-function campaignFromRow_(r) {
-  var id = String(r['活動代碼']).trim();
-  var ignore = String(r['隱藏付款方式'] == null ? '' : r['隱藏付款方式']).trim();
-  // 超商條碼與超商代碼共用期限參數但單位不同（天 / 分鐘），預設關閉條碼
-  if (!ignore) ignore = 'BARCODE';
+function normalizeCampaign_(id, r) {
+  var ignore = r.ignorePayment == null ? 'BARCODE' : String(r.ignorePayment).trim();
   if (ignore === '無') ignore = '';
+  var types = [SHIP_TYPE.CVS, SHIP_TYPE.HOME, SHIP_TYPE.MEET, SHIP_TYPE.NONE];
   return {
     id: id,
-    title: String(r['活動名稱'] || id).trim(),
-    orderPrefix: String(r['訂單前綴'] || '').trim().toUpperCase(),
-    paymentMode: String(r['付款模式'] || '').trim().toLowerCase() === 'donate' ? 'donate' : 'aio',
-    freeShippingOver: Math.max(0, Number(r['滿額免運']) || 0),
-    atmExpireDays: Math.max(1, Math.floor(Number(r['ATM繳費天數']) || 1)),
-    cvsExpireMinutes: Math.max(1, Math.floor(Number(r['超商代碼繳費分鐘']) || 1440)),
+    title: String(r.title || id).trim(),
+    orderPrefix: String(r.orderPrefix || '').trim().toUpperCase(),
+    paymentMode: String(r.paymentMode || '').toLowerCase() === 'donate' ? 'donate' : 'aio',
+    freeShippingOver: Math.max(0, Number(r.freeShippingOver) || 0),
+    atmExpireDays: Math.max(1, Math.floor(Number(r.atmExpireDays) || 1)),
+    cvsExpireMinutes: Math.max(1, Math.floor(Number(r.cvsExpireMinutes) || 1440)),
     ignorePayment: ignore,
-    donateUrl: String(r['贊助頁網址'] || '').trim(),
-    shipping: shippingFor_(id)
+    donateUrl: String(r.donateUrl || '').trim(),
+    shipping: (r.shipping || []).filter(function (m) { return m && m.name; }).map(function (m) {
+      return {
+        name: String(m.name).trim(),
+        type: types.indexOf(m.type) >= 0 ? m.type : SHIP_TYPE.CVS,
+        fee: Math.max(0, Number(m.fee) || 0)
+      };
+    }),
+    products: (r.products || []).filter(function (p) {
+      return p && p.sku && p.name && Number(p.price) >= 0;
+    }).map(function (p) {
+      return { sku: String(p.sku), name: String(p.name), group: String(p.group || ''), price: Number(p.price) };
+    })
   };
 }
 
-function shippingFor_(id) {
-  return readTable_(sheet_(SHIPPING_SHEET)).rows
-    .filter(function (s) {
-      return String(s['活動代碼'] || '').trim() === id && String(s['方式名稱'] || '').trim() && isOn_(s['啟用'], true);
-    })
-    .sort(function (a, b) { return (Number(a['排序']) || 0) - (Number(b['排序']) || 0); })
-    .map(function (s) {
-      var type = String(s['類型'] || '').trim();
-      var types = [SHIP_TYPE.CVS, SHIP_TYPE.HOME, SHIP_TYPE.MEET, SHIP_TYPE.NONE];
-      return {
-        name: String(s['方式名稱']).trim(),
-        type: types.indexOf(type) >= 0 ? type : SHIP_TYPE.CVS,
-        fee: Math.max(0, Number(s['運費']) || 0)
-      };
-    });
-}
-
 /**
- * 確認試算表結構是最新版（新增的工作表 / 欄位 / 下拉選單、舊分頁合併）。
+ * 確認試算表結構是最新版（訂單 / 通知紀錄分頁、欄位、下拉選單、舊分頁合併）。
  * 網頁應用程式每次請求都會呼叫；版本相同時只讀一次指令碼屬性。
  */
 function ensureSchema_(force) {
@@ -77,30 +99,8 @@ function ensureSchema_(force) {
     if (!force && props.getProperty('SCHEMA_VERSION') === SCHEMA_VERSION) return;
     var ss = spreadsheet_();
     mergeLegacySheets_(ss, LEGACY_ORDER_PREFIX, ORDER_SHEET, '活動');
-    mergeLegacySheets_(ss, LEGACY_PRODUCT_PREFIX, PRODUCT_SHEET, '活動代碼');
-
-    var camp = ensureSheet_(ss, CAMPAIGN_SHEET, CAMPAIGN_HEADERS);
-    var ship = ensureSheet_(ss, SHIPPING_SHEET, SHIPPING_HEADERS);
-    var products = ensureSheet_(ss, PRODUCT_SHEET, PRODUCT_HEADERS);
     ensureSheet_(ss, ORDER_SHEET, ORDER_HEADERS).setTabColor('#287bb9');
     ensureSheet_(ss, LOG_SHEET, LOG_HEADERS);
-
-    var existing = readTable_(camp).rows.map(function (r) { return String(r['活動代碼'] || '').trim(); });
-    var withProducts = readTable_(products).rows.map(function (r) { return String(r['活動代碼'] || '').trim(); });
-    SEED_CAMPAIGNS.forEach(function (seed) {
-      var id = seed.row['活動代碼'];
-      if (existing.indexOf(id) >= 0) return;
-      appendObject_(camp, seed.row);
-      seed.shipping.forEach(function (s) {
-        appendObject_(ship, { '活動代碼': id, '方式名稱': s[0], '類型': s[1], '運費': s[2], '排序': s[3], '啟用': s[4] });
-      });
-      if (withProducts.indexOf(id) >= 0) return;
-      seed.products.forEach(function (p) {
-        appendObject_(products, {
-          '活動代碼': id, '商品代碼': p[0], '商品名稱': p[1], '內容': p[2], '單價': p[3], '上架': p[4], '排序': p[5]
-        });
-      });
-    });
     props.setProperty('SCHEMA_VERSION', SCHEMA_VERSION);
   } finally {
     lock.releaseLock();
@@ -108,7 +108,7 @@ function ensureSchema_(force) {
 }
 
 /**
- * v2 以前每個活動各有「訂單_活動代碼」「商品_活動代碼」分頁，合併到共用分頁：
+ * v2 以前每個活動各有「訂單_活動代碼」分頁，合併到共用分頁：
  * 共用分頁還不存在時，直接把第一張改名（資料、格式、篩選都保留）；
  * 其餘逐列搬過去，舊分頁改名為「（已合併）…」保留備查，不刪除。
  */
@@ -182,20 +182,9 @@ function ensureSheet_(ss, name, headers) {
     var rule = SpreadsheetApp.newDataValidation().requireValueInList(values, true).setAllowInvalid(!strict).build();
     sheet.getRange(2, map[col], rows, 1).setDataValidation(rule);
   };
-  var checkbox = function (col) {
-    if (!map[col]) return;
-    sheet.getRange(2, map[col], rows, 1).setDataValidation(SpreadsheetApp.newDataValidation().requireCheckbox().build());
-  };
   if (headers === ORDER_HEADERS) {
     list('狀態', STATUS_LIST, true);
     list('出貨狀態', SHIP_STATUS_LIST, false);
-  } else if (headers === PRODUCT_HEADERS) {
-    checkbox('上架');
-  } else if (headers === SHIPPING_HEADERS) {
-    list('類型', [SHIP_TYPE.CVS, SHIP_TYPE.HOME, SHIP_TYPE.MEET, SHIP_TYPE.NONE], true);
-    checkbox('啟用');
-  } else if (headers === CAMPAIGN_HEADERS) {
-    list('付款模式', ['aio', 'donate'], true);
   }
   return sheet;
 }
@@ -257,7 +246,11 @@ function sweepExpiredOrders() {
   try {
     var total = 0;
     var sheet = sheet_(ORDER_SHEET);
-    allCampaigns_().forEach(function (c) { total += sweepExpired_(c, sheet, now); });
+    var ids = {};
+    readTable_(sheet).rows.forEach(function (o) {
+      if (o['狀態'] === STATUS.PENDING) ids[String(o['活動'] || '').trim()] = true;
+    });
+    Object.keys(ids).forEach(function (id) { total += sweepExpired_(campaignOrDefault_(id), sheet, now); });
     console.log('標記逾期未付：' + total + ' 筆');
     return total;
   } finally {

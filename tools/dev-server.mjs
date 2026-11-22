@@ -11,7 +11,8 @@ import { createSandbox } from './gas-sandbox.mjs';
 const PORT = Number(process.argv[2] || process.env.PORT || 5173);
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'docs');
 const GAS = `http://localhost:${PORT}/gas`;
-const { ctx, sheets } = createSandbox({ props: { WEBAPP_URL: GAS } });
+const catalog = () => JSON.parse(fs.readFileSync(path.join(ROOT, 'data/catalog.json'), 'utf8'));
+const { ctx, sheets, setCatalog } = createSandbox({ props: { WEBAPP_URL: GAS }, catalog: catalog() });
 ctx.setup();
 
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
@@ -32,13 +33,14 @@ http.createServer(async (req, res) => {
     const p = {
       MerchantID: '3002607', MerchantTradeNo: no, RtnCode: '1', RtnMsg: '交易成功', TradeNo: 'SIM' + Date.now(),
       TradeAmt: String(o['總金額']), PaymentDate: new Date().toISOString().slice(0, 19).replace('T', ' ').replace(/-/g, '/'),
-      PaymentType: 'Credit_CreditCard', SimulatePaid: '1', CustomField1: '2026Birthday'
+      PaymentType: 'Credit_CreditCard', SimulatePaid: '1', CustomField1: String(o['活動'])
     };
     p.CheckMacValue = ctx.ecpayCheckMac_(p, 'pwFHCqoQZGmho4w6', 'EkRm7iFT261dpevs');
     const out = ctx.doPost({ parameter: { action: 'ecpayResult' }, postData: { contents: new URLSearchParams(p).toString() } });
     return send(res, 200, out.html, 'text/html; charset=utf-8');
   }
   if (url.pathname === '/gas') {
+    setCatalog(catalog()); // 每次都讀最新的 docs/data/catalog.json
     const parameter = Object.fromEntries(url.searchParams);
     let out;
     if (req.method === 'POST') {
@@ -60,5 +62,8 @@ http.createServer(async (req, res) => {
   if (path.basename(file) === 'config.js') {
     content = content.toString().replace(/gasUrl:\s*'[^']*'/, `gasUrl: '${GAS}'`);
   }
+  if (path.basename(file) === 'store.js' && file.includes(`${path.sep}data${path.sep}`)) {
+    content = content.toString().replace(/"gasUrl":\s*"[^"]*"/, `"gasUrl": "${GAS}"`);
+  }
   send(res, 200, content, TYPES[path.extname(file)] || 'application/octet-stream');
-}).listen(PORT, () => console.log(`dev server: http://localhost:${PORT}/2026Birthday/`));
+}).listen(PORT, () => console.log(`dev server: http://localhost:${PORT}/`));
