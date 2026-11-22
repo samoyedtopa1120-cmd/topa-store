@@ -448,6 +448,21 @@ tools/                       本機測試與預覽
 
 在編輯器執行 `showConfig` 可檢查設定（不會顯示金鑰）。
 
+## 買動漫商品同步（爬蟲）
+
+`tools/crawl-myacg.mjs` 會抓買動漫賣場「薩摩耶之家」（賣家編號 552667）的所有商品，輸出到 `docs/data/myacg-products.json`。
+
+```bash
+npm run crawl                                   # 預設賣家 552667
+node tools/crawl-myacg.mjs --gid 7819462        # 只給商品編號，自動找出賣家
+node tools/crawl-myacg.mjs --out /tmp/x.json    # 輸出到別的位置
+```
+
+- 每個商品包含：標題、說明、分類、上架 / 編輯時間、主圖與縮圖、取貨方式、銷量，以及每個規格的商品編號、名稱、價格、庫存。
+- 遵守 robots.txt：只抓允許的路徑，請求間隔 5 秒（7 個商品約 3 分鐘）。
+- 內容沒有變動時不會改寫檔案，之後改成每日排程也不會產生空的 commit。
+- 買動漫改版導致抓不到時，程式會以錯誤結束、不覆蓋舊資料。
+
 ## 本機開發
 
 ```bash

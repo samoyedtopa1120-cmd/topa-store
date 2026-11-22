@@ -1,0 +1,439 @@
+{
+  "crawledAt": "2026-11-22T14:59:00.060Z",
+  "source": "https://www.myacg.com.tw/seller_market.php?seller=552667",
+  "seller": {
+    "id": "552667",
+    "name": "薩摩耶之家"
+  },
+  "count": 7,
+  "products": [
+    {
+      "gid": "7819462",
+      "url": "https://www.myacg.com.tw/goods_detail.php?gid=7819462",
+      "title": "【多帕】2026生日滑鼠墊/厚壓克力磚",
+      "groupId": "420741",
+      "seller": {
+        "id": "552667",
+        "name": "薩摩耶之家"
+      },
+      "category": "玩具 > PVC人偶 > 女性人偶 > 其他",
+      "listedAt": "2026-11-20 20:01:45",
+      "lastEditedAt": "2026-11-20 20:01",
+      "publishAmount": 10,
+      "buyRule": "使用超商取貨付款 : 超商未取貨 ≤ 3 次",
+      "pickup": [
+        "7-11取貨付款60元",
+        "7-11取貨60元",
+        "全家 取貨付款60元",
+        "全家 取貨60元"
+      ],
+      "image": "https://cdn.myacg.com.tw/goods_images/_1_202611202001451.jpg",
+      "description": "本次販售商品：\n1.雙層印刷厚壓克力磚（15*10*2cm）\n2.大滑鼠墊（700*400*4mm）\n3.親簽明信片\n\n商品圖面：本次生日主視覺（本表單原圖&直播封面）\n\n大套組之生日快樂之我全都要（厚壓克力磚+親簽明信片+大滑鼠墊）（NT1120）\n防身武器好安心（厚壓克力磚）（NT650）\n滑鼠也滑狗（大滑鼠墊）（NT520）",
+      "variants": [
+        {
+          "gid": "7819462",
+          "name": "大套組",
+          "price": 1120,
+          "stock": 1,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7810855v16_NqedN_20261120200501.jpg"
+        },
+        {
+          "gid": "7819463",
+          "name": "厚壓克力磚",
+          "price": 650,
+          "stock": 5,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7810855v16_NqedN_20261120200501.jpg"
+        },
+        {
+          "gid": "7819464",
+          "name": "大滑鼠墊",
+          "price": 520,
+          "stock": 5,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7810855v16_NqedN_20261120200501.jpg"
+        }
+      ],
+      "priceMin": 520,
+      "priceMax": 1120,
+      "priceRange": "520~1120",
+      "totalStock": 11,
+      "soldOut": false,
+      "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v7810853v39_NqedN_20261120200501.jpg",
+      "sales": 4,
+      "listPrice": "520~1120"
+    },
+    {
+      "gid": "7763595",
+      "url": "https://www.myacg.com.tw/goods_detail.php?gid=7763595",
+      "title": "【多帕】2026二周年紀念：食虫植物贊助",
+      "groupId": "417013",
+      "seller": {
+        "id": "552667",
+        "name": "薩摩耶之家"
+      },
+      "category": "玩具 > PVC人偶 > 女性人偶 > 其他",
+      "listedAt": "2026-11-12 00:32:45",
+      "lastEditedAt": "2026-11-12 00:33",
+      "publishAmount": 10,
+      "buyRule": "使用超商取貨付款 : 超商未取貨 ≤ 3 次",
+      "pickup": [
+        "7-11取貨付款60元",
+        "7-11取貨60元",
+        "全家 取貨付款60元",
+        "全家 取貨60元"
+      ],
+      "image": "https://cdn.myacg.com.tw/goods_images/7763595_1_202611120033306.jpg",
+      "description": "【食虫植物cover贊助】植物認養活動！\n二週年發佈的新歌，食虫植物的贊助回饋周邊！\n非常謝謝購買者的贊助！\n詳細規則於表單中！\n\n下單後請填寫表單：https://forms.gle/uzcsUSGCkcg5gVaA6\n\np.s.印刷客製化明信片預購至11/11，若11/11後，則文字採用手寫！",
+      "variants": [
+        {
+          "gid": "7763595",
+          "name": "小豬籠草",
+          "price": 520,
+          "stock": 10,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7754987v51_NqedN_20261112003502.jpg"
+        },
+        {
+          "gid": "7763596",
+          "name": "大捕蠅草",
+          "price": 1120,
+          "stock": 9,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v7754987v51_NqedN_20261112003502.jpg"
+        }
+      ],
+      "priceMin": 520,
+      "priceMax": 1120,
+      "priceRange": "520~1120",
+      "totalStock": 19,
+      "soldOut": false,
+      "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v7754986v78_NqedN_20261112003502.jpg",
+      "sales": 1,
+      "listPrice": "520~1120"
+    },
+    {
+      "gid": "6965939",
+      "url": "https://www.myacg.com.tw/goods_detail.php?gid=6965939",
+      "title": "【多魚組合】《多魚的我們》原創曲應援周邊",
+      "groupId": "346865",
+      "seller": {
+        "id": "552667",
+        "name": "薩摩耶之家"
+      },
+      "category": "玩具 > PVC人偶 > 女性人偶 > 其他",
+      "listedAt": "2026-03-25 22:56:40",
+      "lastEditedAt": "2026-03-25 23:24",
+      "publishAmount": 10,
+      "buyRule": "使用超商取貨付款 : 超商未取貨 ≤ 3 次",
+      "pickup": [
+        "7-11取貨付款60元",
+        "7-11取貨60元",
+        "全家 取貨付款60元",
+        "全家 取貨60元"
+      ],
+      "image": "https://cdn.myacg.com.tw/goods_images/_1_202603252256408.jpg",
+      "description": "小小打CALL：1.雙人親簽名明信片*1 2.透明背卡貼紙（A6） 3.串串吊飾（多魚）（36.23*19.39mm&30.44*18.27mm）\n\n大大的LOVE：1.超厚壓克力磚（10*15*2cm）2.ASMR 3.雙人親簽名明信片*1 4.透明背卡貼紙（A6） 5.串串吊飾（多魚）（36.23*19.39mm&30.44*18.27mm） 6.資訊欄贊助掛名（請於訂單備註的地方備註希望被寫在歌曲資訊欄之名稱）\n\n特別的LOVE：1.多魚手寫感謝明信片*2（多魷分開各寫一張） 2.超厚壓克力磚（10*15*2cm） 3.ASMR 4.雙人親簽名明信片*1 5.透明背卡貼紙（A6） 6.串串吊飾（多魚）（36.23*19.39mm&30.44*18.27mm） 7.資訊欄贊助掛名（請於訂單備註的地方備註希望被寫在歌曲資訊欄之名稱）\n\np.s.特別的LOVE套組，還會有神秘的小驚喜喔",
+      "variants": [
+        {
+          "gid": "6965939",
+          "name": "小小打CALL",
+          "price": 520,
+          "stock": 29,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6957443v39_NqedN_20260325232501.jpg"
+        },
+        {
+          "gid": "6965940",
+          "name": "大大的LOVE",
+          "price": 2000,
+          "stock": 23,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6957443v39_NqedN_20260325232501.jpg"
+        },
+        {
+          "gid": "6965941",
+          "name": "特別的LOVE",
+          "price": 3000,
+          "stock": 12,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6957443v39_NqedN_20260325232501.jpg"
+        }
+      ],
+      "priceMin": 520,
+      "priceMax": 3000,
+      "priceRange": "520~3000",
+      "totalStock": 64,
+      "soldOut": false,
+      "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v6957441v1_NqedN_20260325232501.jpg",
+      "sales": 11,
+      "listPrice": "520~3000"
+    },
+    {
+      "gid": "6805893",
+      "url": "https://www.myacg.com.tw/goods_detail.php?gid=6805893",
+      "title": "【FF46預設名稱】多帕FF46周邊場後通販",
+      "groupId": "332385",
+      "seller": {
+        "id": "552667",
+        "name": "薩摩耶之家"
+      },
+      "category": "玩具 > PVC人偶 > 女性人偶 > 其他",
+      "listedAt": "2026-02-06 12:57:12",
+      "lastEditedAt": "2026-02-06 12:59",
+      "publishAmount": 10,
+      "buyRule": "使用超商取貨付款 : 超商未取貨 ≤ 3 次",
+      "pickup": [
+        "7-11取貨付款60元",
+        "7-11取貨60元",
+        "全家 取貨付款60元",
+        "全家 取貨60元"
+      ],
+      "image": "https://cdn.myacg.com.tw/goods_images/_1_202602061257127.jpg",
+      "description": "",
+      "variants": [
+        {
+          "gid": "6805893",
+          "name": "新刊套組",
+          "price": 1000,
+          "stock": 24,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+        },
+        {
+          "gid": "6805909",
+          "name": "新刊",
+          "price": 250,
+          "stock": 29,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+        },
+        {
+          "gid": "6805894",
+          "name": "A4資料夾",
+          "price": 100,
+          "stock": 28,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+        },
+        {
+          "gid": "6805895",
+          "name": "氣泡飲飯友",
+          "price": 150,
+          "stock": 22,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+        },
+        {
+          "gid": "6805896",
+          "name": "冬季立牌",
+          "price": 350,
+          "stock": 29,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+        },
+        {
+          "gid": "6805897",
+          "name": "女僕串鍊吊飾",
+          "price": 150,
+          "stock": 29,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+        },
+        {
+          "gid": "6805898",
+          "name": "紅包袋_2入",
+          "price": 100,
+          "stock": 30,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+        },
+        {
+          "gid": "6805899",
+          "name": "紅包袋_5入",
+          "price": 200,
+          "stock": 29,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6797416v54_NqedN_20260206130002.jpg"
+        }
+      ],
+      "priceMin": 100,
+      "priceMax": 1000,
+      "priceRange": "100~1000",
+      "totalStock": 220,
+      "soldOut": false,
+      "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v6797410v91_NqedN_20260206130001.jpg",
+      "sales": 20,
+      "listPrice": "100~1000"
+    },
+    {
+      "gid": "6436630",
+      "url": "https://www.myacg.com.tw/goods_detail.php?gid=6436630",
+      "title": "【多帕】2025一周年紀念週邊",
+      "groupId": "287690",
+      "seller": {
+        "id": "552667",
+        "name": "薩摩耶之家"
+      },
+      "category": "玩具 > PVC人偶 > 女性人偶 > 其他",
+      "listedAt": "2025-10-24 19:09:45",
+      "lastEditedAt": "2025-11-29 15:43",
+      "publishAmount": 10,
+      "buyRule": "使用超商取貨付款 : 超商未取貨 ≤ 3 次",
+      "pickup": [
+        "7-11取貨付款60元",
+        "7-11取貨60元",
+        "全家 取貨付款60元",
+        "全家 取貨60元"
+      ],
+      "image": "https://cdn.myacg.com.tw/goods_images/_1_202510241909451.jpg",
+      "description": "在2025/11/20前下單，贈送【親簽明信片】！\nꕤ大套組內容ꕤ\n1.厚壓克力裝飾畫\n2.養樂多金屬徽章\n3.厚壓克力透卡\n4.多多飯友\n5.耶耶喝水木製杯墊\n\nꕤ小套組內容ꕤ\n1.厚壓克力透卡\n2.多多飯友\n3.耶耶喝水木製杯墊\n\n滑鼠墊規格：700*400*4mm\n繪師：Rocks老師（主視覺、徽章、飯友）、喵大福老師（杯墊）",
+      "variants": [
+        {
+          "gid": "6436630",
+          "name": "大套組",
+          "price": 1500,
+          "stock": 1,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg"
+        },
+        {
+          "gid": "6436631",
+          "name": "小套組",
+          "price": 520,
+          "stock": 7,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg"
+        },
+        {
+          "gid": "6436633",
+          "name": "單購杯墊",
+          "price": 200,
+          "stock": 14,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg"
+        },
+        {
+          "gid": "6439845",
+          "name": "滑鼠墊售完",
+          "price": 520,
+          "stock": 0,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v6431392v21_NqedN_20251129154502.jpg"
+        }
+      ],
+      "priceMin": 200,
+      "priceMax": 1500,
+      "priceRange": "200~1500",
+      "totalStock": 22,
+      "soldOut": false,
+      "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v6428177v11_NqedN_20251129154502.jpg",
+      "sales": 29,
+      "listPrice": "200~1500"
+    },
+    {
+      "gid": "5979743",
+      "url": "https://www.myacg.com.tw/goods_detail.php?gid=5979743",
+      "title": "【多帕】薩摩耶大量發生中：周邊賣場",
+      "groupId": "238707",
+      "seller": {
+        "id": "552667",
+        "name": "薩摩耶之家"
+      },
+      "category": "玩具 > PVC人偶 > 女性人偶 > 其他",
+      "listedAt": "2025-06-18 19:12:24",
+      "lastEditedAt": "2025-06-19 14:07",
+      "publishAmount": 10,
+      "buyRule": "使用超商取貨付款 : 超商未取貨 ≤ 3 次",
+      "pickup": [
+        "7-11取貨付款60元",
+        "7-11取貨60元",
+        "全家 取貨付款60元",
+        "全家 取貨60元"
+      ],
+      "image": "https://cdn.myacg.com.tw/goods_images/_1_202506181912242.jpg",
+      "description": "各種薩摩耶大量發生中！\n\n壓克力吊飾尺寸約為6CM\n（A、D款吊飾扣為星星；B、C款吊飾扣為貓耳）\n防水PVC貼紙一包4張（不同款），尺寸約6*6\n\n我全都要：包含4款吊飾+酒精瓶+防水貼紙各1\n\n繪師：ゆゆず老師",
+      "variants": [
+        {
+          "gid": "5979743",
+          "name": "壓克力吊飾 A款",
+          "price": 200,
+          "stock": 15,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+        },
+        {
+          "gid": "5979744",
+          "name": "壓克力吊飾 B款",
+          "price": 200,
+          "stock": 15,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+        },
+        {
+          "gid": "5979745",
+          "name": "壓克力吊飾 C款",
+          "price": 200,
+          "stock": 15,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+        },
+        {
+          "gid": "5979746",
+          "name": "壓克力吊飾 D款",
+          "price": 200,
+          "stock": 15,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+        },
+        {
+          "gid": "5979748",
+          "name": "酒精瓶",
+          "price": 100,
+          "stock": 19,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+        },
+        {
+          "gid": "5979749",
+          "name": "防水貼紙 一包4款",
+          "price": 180,
+          "stock": 12,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+        },
+        {
+          "gid": "5982146",
+          "name": "我全都要",
+          "price": 1000,
+          "stock": 1,
+          "image": "https://cdn.myacg.com.tw/goods_images/v035_v5973915v37_NqedN_20250619141001.jpg"
+        }
+      ],
+      "priceMin": 100,
+      "priceMax": 1000,
+      "priceRange": "100~1000",
+      "totalStock": 92,
+      "soldOut": false,
+      "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v5971512v0_NqedN_20250619141001.jpg",
+      "sales": 13,
+      "listPrice": "100~1000"
+    },
+    {
+      "gid": "5903455",
+      "url": "https://www.myacg.com.tw/goods_detail.php?gid=5903455",
+      "title": "【多帕】多毛冰淇淋搖搖立牌",
+      "groupId": "0",
+      "seller": {
+        "id": "552667",
+        "name": "薩摩耶之家"
+      },
+      "category": "玩具 > PVC人偶 > 女性人偶 > 其他",
+      "listedAt": "2025-05-28 21:31:18",
+      "lastEditedAt": "2025-05-28 21:31",
+      "publishAmount": 10,
+      "buyRule": "使用超商取貨付款 : 超商未取貨 ≤ 3 次",
+      "pickup": [
+        "7-11取貨付款60元",
+        "7-11取貨60元",
+        "全家 取貨付款60元",
+        "全家 取貨60元"
+      ],
+      "image": "https://cdn.myacg.com.tw/goods_images/5903455_1_202505282131184.jpg",
+      "description": "炎炎夏日，不來點ice cream嗎～\n\n由曉老師繪製的可愛多帕x毛毛吃冰淇淋圖！\n繪師老師推特：https://www.plurk.com/b777888965\n\n尺寸約為7*7CM",
+      "variants": [
+        {
+          "gid": "5903455",
+          "name": "",
+          "price": 200,
+          "stock": 14,
+          "image": null
+        }
+      ],
+      "priceMin": 200,
+      "priceMax": 200,
+      "priceRange": "200",
+      "totalStock": 14,
+      "soldOut": false,
+      "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v5895245v68_NqedN_20250528213501.jpg",
+      "sales": 6,
+      "listPrice": "200"
+    }
+  ],
+  "errors": []
+}

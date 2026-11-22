@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node tools/dev-server.mjs",
     "test": "node tools/test-ecpay.mjs && node tools/test-flow.mjs",
-    "test:live": "node tools/test-ecpay.mjs --live"
+    "test:live": "node tools/test-ecpay.mjs --live",
+    "crawl": "node tools/crawl-myacg.mjs"
   }
 }
