@@ -28,7 +28,7 @@ step "產生網站資料"
 node tools/build-site.mjs
 
 step "測試"
-npm test --silent > /dev/null && echo "測試通過"
+if npm test --silent > /dev/null 2>&1; then echo "測試通過"; else echo "測試失敗，網站沒有更新："; npm test; exit 1; fi
 
 step "推送到 GitHub"
 git add docs/data docs/assets/myacg
