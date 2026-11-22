@@ -1,12 +1,10 @@
-# 每日同步買動漫商品，並依 site/store.json 重新產生網站資料。
-#   - 每天台灣時間 05:00 自動執行（也可以在 Actions 分頁手動按 Run workflow）
-#   - 有人修改 site/store.json 或產生器時，只重新產生（不爬買動漫）
-#   - 內容有變動才 commit
+# 依 site/store.json 與 docs/data/myacg-products.json 重新產生網站資料。
+#   - 買動漫擋海外機房 IP，GitHub 連不到，所以「爬買動漫」改在 Mac 上每天跑（tools/mac-sync/）
+#   - 這個 Action 只負責：有人修改 site/store.json 或產生器時，自動重新產生並 commit
+#   - 也可以在 Actions 分頁手動按 Run workflow
 name: 同步商品
 
 on:
-  schedule:
-    - cron: '0 21 * * *'   # UTC 21:00 = 台灣 05:00
   workflow_dispatch:
   push:
     branches: [main]
@@ -32,18 +30,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-
-      - name: 連線檢查
-        if: github.event_name != 'push'
-        run: |
-          curl -sS -m 20 -o /dev/null -w "myacg robots: %{http_code} %{time_total}s ip=%{remote_ip}\n" https://www.myacg.com.tw/robots.txt || echo "連不到 www.myacg.com.tw"
-          curl -sS -m 20 -o /dev/null -w "myacg cdn: %{http_code}\n" https://cdn.myacg.com.tw/goods_images/gt_good_no_pic_420.jpg || echo "連不到 cdn.myacg.com.tw"
-          curl -sS -m 10 https://ipinfo.io/country || true
-
-      - name: 爬買動漫
-        if: github.event_name != 'push'
-        # 結束碼 2 = 部分商品失敗但已寫入其餘資料，照樣繼續
-        run: node tools/crawl-myacg.mjs || [ $? -eq 2 ]
 
       - name: 產生網站資料
         run: node tools/build-site.mjs
