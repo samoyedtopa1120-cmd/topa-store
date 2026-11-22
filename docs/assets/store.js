@@ -103,11 +103,10 @@
     current = c;
     const st = stateOf(c);
     const [tag, when] = stateLabel(c);
-    $('sheet-img').src = imgSrc(c.image);
-    $('sheet-img').alt = c.imageAlt || '';
-    $('sheet-img').hidden = !c.image;
+    renderGallery(c);
+    $('sheet-scroll').scrollTop = 0;
     $('sheet-tag').textContent = tag;
-    $('sheet-tag').parentElement.parentElement.parentElement.className = 'sheet-inner is-' + st;
+    sheet.querySelector('.sheet-inner').className = 'sheet-inner is-' + st;
     $('sheet-when').textContent = when;
     $('sheet-title').textContent = c.title;
     $('sheet-summary').textContent = c.summary || '';
@@ -119,6 +118,55 @@
     if (sheet.showModal) sheet.showModal(); else sheet.setAttribute('open', '');
     $('sheet-done').focus({ preventScroll: true });
   }
+  // ---------- 圖庫：左右滑動（scroll-snap），圖片完整顯示不裁切 ----------
+  const track = $('gallery-track');
+  function renderGallery(c) {
+    const imgs = (c.images && c.images.length ? c.images : [c.image]).filter(Boolean);
+    $('gallery').hidden = !imgs.length;
+    track.innerHTML = '';
+    $('gallery-dots').innerHTML = '';
+    imgs.forEach((src, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'gallery-slide';
+      const img = document.createElement('img');
+      img.src = imgSrc(src);
+      img.alt = `${c.imageAlt || c.title}（${i + 1}/${imgs.length}）`;
+      img.loading = i ? 'lazy' : 'eager';
+      slide.appendChild(img);
+      track.appendChild(slide);
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `第 ${i + 1} 張`);
+      dot.addEventListener('click', () => goTo(i));
+      $('gallery-dots').appendChild(dot);
+    });
+    const multi = imgs.length > 1;
+    $('gallery-dots').hidden = !multi;
+    $('gallery-prev').hidden = !multi;
+    $('gallery-next').hidden = !multi;
+    track.scrollLeft = 0;
+    markDot();
+  }
+  const slideIndex = () => Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+  function goTo(i) {
+    const n = track.children.length;
+    if (!n) return;
+    i = (i + n) % n;
+    track.scrollTo({ left: i * track.clientWidth, behavior: calm ? 'auto' : 'smooth' });
+  }
+  function markDot() {
+    const i = slideIndex();
+    [...$('gallery-dots').children].forEach((d, k) => d.classList.toggle('on', k === i));
+  }
+  track.addEventListener('scroll', () => requestAnimationFrame(markDot), { passive: true });
+  $('gallery-prev').addEventListener('click', () => goTo(slideIndex() - 1));
+  $('gallery-next').addEventListener('click', () => goTo(slideIndex() + 1));
+  sheet.addEventListener('keydown', (e) => {
+    if (e.target.closest('input, textarea')) return;
+    if (e.key === 'ArrowLeft') goTo(slideIndex() - 1);
+    if (e.key === 'ArrowRight') goTo(slideIndex() + 1);
+  });
+
   function closeSheet() {
     if (sheet.close) sheet.close(); else sheet.removeAttribute('open');
   }

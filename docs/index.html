@@ -153,13 +153,21 @@
   <dialog id="sheet" class="sheet" aria-labelledby="sheet-title">
     <div class="sheet-inner">
       <button type="button" class="sheet-close" id="sheet-close" aria-label="關閉">×</button>
-      <img class="sheet-img" id="sheet-img" alt="">
+      <!-- 圖庫與內容一起捲動，只有底部的「完成」固定 -->
+      <div class="sheet-scroll" id="sheet-scroll">
+      <div class="gallery" id="gallery">
+        <div class="gallery-track" id="gallery-track"></div>
+        <button type="button" class="gallery-nav prev" id="gallery-prev" aria-label="上一張">‹</button>
+        <button type="button" class="gallery-nav next" id="gallery-next" aria-label="下一張">›</button>
+        <div class="gallery-dots" id="gallery-dots"></div>
+      </div>
       <div class="sheet-body">
         <div class="sheet-top"><span class="tag" id="sheet-tag"></span><span class="sheet-when" id="sheet-when"></span></div>
         <h2 id="sheet-title"></h2>
         <p class="sheet-summary" id="sheet-summary"></p>
         <details class="sheet-desc" id="sheet-desc"><summary>商品說明</summary><div id="sheet-desc-text"></div></details>
         <div class="products" id="sheet-products"></div>
+      </div>
       </div>
       <div class="sheet-foot">
         <div class="sheet-sum" id="sheet-sum"></div>

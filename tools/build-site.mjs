@@ -77,7 +77,11 @@ for (const c of config.collections || []) {
     id: 'g' + gid,
     title,
     summary: c.summary || '',
-    image: c.heroImage || src.imageLocal || src.image || '',
+    // 圖庫：store.json 的 images ＞ heroImage（單張）＞ 買動漫的所有商品圖
+    images: (c.images && c.images.length ? c.images
+      : c.heroImage ? [c.heroImage]
+      : (src.imagesLocal && src.imagesLocal.length ? src.imagesLocal : [src.imageLocal || src.image].filter(Boolean))),
+    image: '',
     imageAlt: c.heroAlt || title,
     description: c.description != null ? c.description : src.description || '',
     opens: c.opens || '',
@@ -87,6 +91,7 @@ for (const c of config.collections || []) {
     priceMax: Math.max(...prices),
     products
   };
+  col.image = col.images[0] || '';
   collections.push(col);
 
   if (c.legacyCampaign) {

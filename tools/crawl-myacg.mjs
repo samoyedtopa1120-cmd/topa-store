@@ -199,6 +199,8 @@ function parseDetail(html, gid) {
     publishAmount: Number(summary('刊登數量')) || null,
     buyRule: text(/data-online="rule">([\s\S]*?)<\/p>/, html),
     pickup: [...pickupBlock.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/g)].map((m) => htmlToText(m[1])).filter(Boolean),
+    // 商品圖庫：頁面上每張圖都是一個 <div class="_main_pic" data-pic="…">
+    images: [...new Set([...html.matchAll(/class="_main_pic" data-pic="([^"]+)"/g)].map((m) => m[1]))],
     image: first(/class="_main_pic" data-pic="([^"]+)"/, html) || first(/<meta property="og:image" content="([^"]+)"/, html),
     // 頁面 CSS 也有 [data-ui="product_details"]，要比對 <div 開頭的那個
     description: text(/<div data-ui="product_details"[^>]*>([\s\S]*?)<!-- product_details end -->/, html)
@@ -252,7 +254,13 @@ async function crawlProduct(gid) {
   p.soldOut = p.totalStock === 0;
 
   // 圖片：主圖一定下載；規格圖只有在各規格圖片不同時才有意義
-  p.imageLocal = await downloadImage(p.image).catch((err) => { log(err.message); return null; });
+  if (!p.images.length && p.image) p.images = [p.image];
+  p.imagesLocal = [];
+  for (const url of p.images) {
+    const local = await downloadImage(url).catch((err) => { log(err.message); return null; });
+    if (local) p.imagesLocal.push(local);
+  }
+  p.imageLocal = p.imagesLocal[0] || null;
   const distinct = new Set(variants.map((v) => v.image).filter(Boolean));
   for (const v of variants) {
     v.imageLocal = distinct.size > 1 && v.image ? await downloadImage(v.image).catch(() => null) : null;

@@ -1,5 +1,5 @@
 {
-  "crawledAt": "2026-11-22T15:14:07.292Z",
+  "crawledAt": "2026-11-22T15:46:29.002Z",
   "source": "https://www.myacg.com.tw/seller_market.php?seller=552667",
   "seller": {
     "id": "552667",
@@ -26,6 +26,9 @@
         "7-11取貨60元",
         "全家 取貨付款60元",
         "全家 取貨60元"
+      ],
+      "images": [
+        "https://cdn.myacg.com.tw/goods_images/_1_202611202001451.jpg"
       ],
       "image": "https://cdn.myacg.com.tw/goods_images/_1_202611202001451.jpg",
       "description": "本次販售商品：\n1.雙層印刷厚壓克力磚（15*10*2cm）\n2.大滑鼠墊（700*400*4mm）\n3.親簽明信片\n\n商品圖面：本次生日主視覺（本表單原圖&直播封面）\n\n大套組之生日快樂之我全都要（厚壓克力磚+親簽明信片+大滑鼠墊）（NT1120）\n防身武器好安心（厚壓克力磚）（NT650）\n滑鼠也滑狗（大滑鼠墊）（NT520）",
@@ -60,6 +63,9 @@
       "priceRange": "520~1120",
       "totalStock": 11,
       "soldOut": false,
+      "imagesLocal": [
+        "assets/myacg/_1_202611202001451.jpg"
+      ],
       "imageLocal": "assets/myacg/_1_202611202001451.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v7810853v39_NqedN_20261120200501.jpg",
       "sales": 4,
@@ -84,6 +90,9 @@
         "7-11取貨60元",
         "全家 取貨付款60元",
         "全家 取貨60元"
+      ],
+      "images": [
+        "https://cdn.myacg.com.tw/goods_images/7763595_1_202611120033306.jpg"
       ],
       "image": "https://cdn.myacg.com.tw/goods_images/7763595_1_202611120033306.jpg",
       "description": "【食虫植物cover贊助】植物認養活動！\n二週年發佈的新歌，食虫植物的贊助回饋周邊！\n非常謝謝購買者的贊助！\n詳細規則於表單中！\n\n下單後請填寫表單：https://forms.gle/uzcsUSGCkcg5gVaA6\n\np.s.印刷客製化明信片預購至11/11，若11/11後，則文字採用手寫！",
@@ -110,6 +119,9 @@
       "priceRange": "520~1120",
       "totalStock": 19,
       "soldOut": false,
+      "imagesLocal": [
+        "assets/myacg/7763595_1_202611120033306.jpg"
+      ],
       "imageLocal": "assets/myacg/7763595_1_202611120033306.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v7754986v78_NqedN_20261112003502.jpg",
       "sales": 1,
@@ -134,6 +146,9 @@
         "7-11取貨60元",
         "全家 取貨付款60元",
         "全家 取貨60元"
+      ],
+      "images": [
+        "https://cdn.myacg.com.tw/goods_images/_1_202603252256408.jpg"
       ],
       "image": "https://cdn.myacg.com.tw/goods_images/_1_202603252256408.jpg",
       "description": "小小打CALL：1.雙人親簽名明信片*1 2.透明背卡貼紙（A6） 3.串串吊飾（多魚）（36.23*19.39mm&30.44*18.27mm）\n\n大大的LOVE：1.超厚壓克力磚（10*15*2cm）2.ASMR 3.雙人親簽名明信片*1 4.透明背卡貼紙（A6） 5.串串吊飾（多魚）（36.23*19.39mm&30.44*18.27mm） 6.資訊欄贊助掛名（請於訂單備註的地方備註希望被寫在歌曲資訊欄之名稱）\n\n特別的LOVE：1.多魚手寫感謝明信片*2（多魷分開各寫一張） 2.超厚壓克力磚（10*15*2cm） 3.ASMR 4.雙人親簽名明信片*1 5.透明背卡貼紙（A6） 6.串串吊飾（多魚）（36.23*19.39mm&30.44*18.27mm） 7.資訊欄贊助掛名（請於訂單備註的地方備註希望被寫在歌曲資訊欄之名稱）\n\np.s.特別的LOVE套組，還會有神秘的小驚喜喔",
@@ -168,6 +183,9 @@
       "priceRange": "520~3000",
       "totalStock": 64,
       "soldOut": false,
+      "imagesLocal": [
+        "assets/myacg/_1_202603252256408.jpg"
+      ],
       "imageLocal": "assets/myacg/_1_202603252256408.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v6957441v1_NqedN_20260325232501.jpg",
       "sales": 11,
@@ -192,6 +210,9 @@
         "7-11取貨60元",
         "全家 取貨付款60元",
         "全家 取貨60元"
+      ],
+      "images": [
+        "https://cdn.myacg.com.tw/goods_images/_1_202602061257127.jpg"
       ],
       "image": "https://cdn.myacg.com.tw/goods_images/_1_202602061257127.jpg",
       "description": "",
@@ -266,6 +287,9 @@
       "priceRange": "100~1000",
       "totalStock": 220,
       "soldOut": false,
+      "imagesLocal": [
+        "assets/myacg/_1_202602061257127.jpg"
+      ],
       "imageLocal": "assets/myacg/_1_202602061257127.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v6797410v91_NqedN_20260206130001.jpg",
       "sales": 20,
@@ -290,6 +314,11 @@
         "7-11取貨60元",
         "全家 取貨付款60元",
         "全家 取貨60元"
+      ],
+      "images": [
+        "https://cdn.myacg.com.tw/goods_images/_1_202510241909451.jpg",
+        "https://cdn.myacg.com.tw/goods_images/_2_202510241909457.jpg",
+        "https://cdn.myacg.com.tw/goods_images/_3_202510241909456.jpg"
       ],
       "image": "https://cdn.myacg.com.tw/goods_images/_1_202510241909451.jpg",
       "description": "在2025/11/20前下單，贈送【親簽明信片】！\nꕤ大套組內容ꕤ\n1.厚壓克力裝飾畫\n2.養樂多金屬徽章\n3.厚壓克力透卡\n4.多多飯友\n5.耶耶喝水木製杯墊\n\nꕤ小套組內容ꕤ\n1.厚壓克力透卡\n2.多多飯友\n3.耶耶喝水木製杯墊\n\n滑鼠墊規格：700*400*4mm\n繪師：Rocks老師（主視覺、徽章、飯友）、喵大福老師（杯墊）",
@@ -332,6 +361,11 @@
       "priceRange": "200~1500",
       "totalStock": 22,
       "soldOut": false,
+      "imagesLocal": [
+        "assets/myacg/_1_202510241909451.jpg",
+        "assets/myacg/_2_202510241909457.jpg",
+        "assets/myacg/_3_202510241909456.jpg"
+      ],
       "imageLocal": "assets/myacg/_1_202510241909451.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v6428177v11_NqedN_20251129154502.jpg",
       "sales": 29,
@@ -356,6 +390,12 @@
         "7-11取貨60元",
         "全家 取貨付款60元",
         "全家 取貨60元"
+      ],
+      "images": [
+        "https://cdn.myacg.com.tw/goods_images/_1_202506181912242.jpg",
+        "https://cdn.myacg.com.tw/goods_images/_2_202506181912243.jpg",
+        "https://cdn.myacg.com.tw/goods_images/_3_202506181912249.jpg",
+        "https://cdn.myacg.com.tw/goods_images/5979743_4_202506181921504.jpg"
       ],
       "image": "https://cdn.myacg.com.tw/goods_images/_1_202506181912242.jpg",
       "description": "各種薩摩耶大量發生中！\n\n壓克力吊飾尺寸約為6CM\n（A、D款吊飾扣為星星；B、C款吊飾扣為貓耳）\n防水PVC貼紙一包4張（不同款），尺寸約6*6\n\n我全都要：包含4款吊飾+酒精瓶+防水貼紙各1\n\n繪師：ゆゆず老師",
@@ -422,6 +462,12 @@
       "priceRange": "100~1000",
       "totalStock": 92,
       "soldOut": false,
+      "imagesLocal": [
+        "assets/myacg/_1_202506181912242.jpg",
+        "assets/myacg/_2_202506181912243.jpg",
+        "assets/myacg/_3_202506181912249.jpg",
+        "assets/myacg/5979743_4_202506181921504.jpg"
+      ],
       "imageLocal": "assets/myacg/_1_202506181912242.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v5971512v0_NqedN_20250619141001.jpg",
       "sales": 13,
@@ -447,6 +493,10 @@
         "全家 取貨付款60元",
         "全家 取貨60元"
       ],
+      "images": [
+        "https://cdn.myacg.com.tw/goods_images/5903455_1_202505282131184.jpg",
+        "https://cdn.myacg.com.tw/goods_images/5903455_2_202505282131187.jpg"
+      ],
       "image": "https://cdn.myacg.com.tw/goods_images/5903455_1_202505282131184.jpg",
       "description": "炎炎夏日，不來點ice cream嗎～\n\n由曉老師繪製的可愛多帕x毛毛吃冰淇淋圖！\n繪師老師推特：https://www.plurk.com/b777888965\n\n尺寸約為7*7CM",
       "variants": [
@@ -464,6 +514,10 @@
       "priceRange": "200",
       "totalStock": 14,
       "soldOut": false,
+      "imagesLocal": [
+        "assets/myacg/5903455_1_202505282131184.jpg",
+        "assets/myacg/5903455_2_202505282131187.jpg"
+      ],
       "imageLocal": "assets/myacg/5903455_1_202505282131184.jpg",
       "thumbnail": "https://cdn.myacg.com.tw/goods_images/v035_v5895245v68_NqedN_20250528213501.jpg",
       "sales": 6,
