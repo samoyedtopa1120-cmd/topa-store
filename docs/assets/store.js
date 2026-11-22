@@ -132,6 +132,7 @@
       img.src = imgSrc(src);
       img.alt = `${c.imageAlt || c.title}（${i + 1}/${imgs.length}）`;
       img.loading = i ? 'lazy' : 'eager';
+      img.draggable = false; // 避免拖曳時拖出圖片
       slide.appendChild(img);
       track.appendChild(slide);
       const dot = document.createElement('button');
@@ -159,6 +160,36 @@
     [...$('gallery-dots').children].forEach((d, k) => d.classList.toggle('on', k === i));
   }
   track.addEventListener('scroll', () => requestAnimationFrame(markDot), { passive: true });
+
+  // 滑鼠拖曳換圖（手機本來就能用手指滑）：拖超過 1/6 寬或甩得夠快就換下一張
+  let drag = null;
+  track.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse' || e.button !== 0 || track.children.length < 2) return;
+    drag = { x: e.clientX, left: track.scrollLeft, start: slideIndex(), t: Date.now(), moved: false };
+    track.setPointerCapture(e.pointerId);
+    track.classList.add('dragging');
+  });
+  track.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x;
+    if (Math.abs(dx) > 3) drag.moved = true;
+    track.scrollLeft = drag.left - dx;
+  });
+  const endDrag = (e) => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x;
+    const fast = Math.abs(dx) > 30 && Date.now() - drag.t < 250;
+    const step = Math.abs(dx) > track.clientWidth / 6 || fast ? (dx < 0 ? 1 : -1) : 0;
+    const target = Math.max(0, Math.min(track.children.length - 1, drag.start + step));
+    track.classList.remove('dragging');
+    if (track.hasPointerCapture(e.pointerId)) track.releasePointerCapture(e.pointerId);
+    const moved = drag.moved;
+    drag = null;
+    track.scrollTo({ left: target * track.clientWidth, behavior: calm ? 'auto' : 'smooth' });
+    if (moved) track.addEventListener('click', (ev) => ev.stopPropagation(), { capture: true, once: true });
+  };
+  track.addEventListener('pointerup', endDrag);
+  track.addEventListener('pointercancel', endDrag);
   $('gallery-prev').addEventListener('click', () => goTo(slideIndex() - 1));
   $('gallery-next').addEventListener('click', () => goTo(slideIndex() + 1));
   sheet.addEventListener('keydown', (e) => {

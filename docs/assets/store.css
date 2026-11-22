@@ -106,6 +106,10 @@ body.store::before { display: none; }
 .gallery-track::-webkit-scrollbar { display: none; }
 /* 高度跟著圖片走（同一組裡最高的那張），不留大片空白 */
 .gallery-track { align-items: center; }
+/* 電腦上可用滑鼠拖曳換圖；拖曳時暫停吸附，放開後再對齊到最近的一張 */
+@media (hover: hover) and (pointer: fine) { .gallery-track { cursor: grab; } }
+.gallery-track.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.gallery-track.dragging .gallery-slide { scroll-snap-align: none; }
 .gallery-slide { flex: 0 0 100%; scroll-snap-align: center; display: grid; place-items: center; padding: 10px 10px 24px; }
 .gallery-slide img { display: block; max-width: 100%; max-height: min(62vh, 560px); width: auto; height: auto; object-fit: contain; border-radius: 12px; }
 .gallery-dots:empty, .gallery-dots[hidden] + * { display: none; }
