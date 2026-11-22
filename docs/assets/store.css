@@ -99,15 +99,15 @@ body.store::before { display: none; }
 .sheet-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
 
 /* 圖庫：橫向滑動，圖片完整顯示（contain），會跟著內容一起捲走 */
-/* 圖片底色：淺藍色，圖片比例不同時空白處用它填滿 */
+/* 周邊按鈕縮圖在圖片載入前顯示的底色：淺藍色 */
 :root { --img-bg: #d6ebfa; }
-.gallery { position: relative; background: var(--img-bg); }
+.gallery { position: relative; background: var(--accent-soft); }
 .gallery-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .gallery-track::-webkit-scrollbar { display: none; }
 /* 高度跟著圖片走（同一組裡最高的那張），不留大片空白 */
 .gallery-track { align-items: center; }
 .gallery-slide { flex: 0 0 100%; scroll-snap-align: center; display: grid; place-items: center; padding: 10px 10px 24px; }
-.gallery-slide img { display: block; background: var(--img-bg); max-width: 100%; max-height: min(62vh, 560px); width: auto; height: auto; object-fit: contain; border-radius: 12px; }
+.gallery-slide img { display: block; max-width: 100%; max-height: min(62vh, 560px); width: auto; height: auto; object-fit: contain; border-radius: 12px; }
 .gallery-dots:empty, .gallery-dots[hidden] + * { display: none; }
 .gallery-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; border: 0; border-radius: 50%; background: #ffffffd9; color: var(--accent-deep); font-size: 26px; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px #0002; }
 .gallery-nav.prev { left: 10px; }
