@@ -8,6 +8,6 @@
     "test:live": "node tools/test-ecpay.mjs --live",
     "crawl": "node tools/crawl-myacg.mjs",
     "build": "node tools/build-site.mjs",
-    "sync": "node tools/crawl-myacg.mjs && node tools/build-site.mjs"
+    "sync": "bash tools/sync.sh"
   }
 }

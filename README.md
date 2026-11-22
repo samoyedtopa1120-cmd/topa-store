@@ -1,6 +1,6 @@
 # 多帕周邊商店（topa-store）
 
-買動漫賣場（每日同步）→ GitHub Pages 商店頁 → Google Apps Script 建單寫入試算表 → 綠界全方位金流付款 → 回寫付款結果 → 訂單頁。
+買動漫賣場（手動同步）→ GitHub Pages 商店頁 → Google Apps Script 建單寫入試算表 → 綠界全方位金流付款 → 回寫付款結果 → 訂單頁。
 
 - 商店：https://samoyedtopa1120-cmd.github.io/topa-store/
 - 商品來源：買動漫賣場「薩摩耶之家」https://www.myacg.com.tw/seller_market.php?seller=552667
@@ -16,7 +16,7 @@
   - [5. 自訂題目與備註欄](#5-自訂題目與備註欄)
   - [6. 運費與付款設定](#6-運費與付款設定)
   - [7. 訂單管理：對帳、出貨、取消、退款](#7-訂單管理對帳出貨取消退款)
-  - [8. 怎麼修改設定、手動同步](#8-怎麼修改設定手動同步)
+  - [8. 怎麼修改設定、同步買動漫](#8-怎麼修改設定同步買動漫)
   - [9. 常見問題](#9-常見問題)
 - [技術說明](#技術說明)
 
@@ -27,7 +27,7 @@
 ## 1. 先認識：哪些東西在哪裡改
 
 ```
-買動漫賣場 ──Mac 每天 05:00、13:00 同步──▶ 商品資料
+買動漫賣場 ──在電腦執行 npm run sync──▶ 商品資料
                                       │
 site/store.json（手動設定）───────────┤
                                       ▼
@@ -38,7 +38,7 @@ site/store.json（手動設定）───────────┤
 
 | 在哪裡 | 管什麼 | 改完多久生效 |
 | --- | --- | --- |
-| **買動漫賣場** | 商品名稱、規格、價格、說明、主圖、庫存 | 每天 05:00、13:00 由 Mac 自動同步；急的話可手動同步（第 8 節） |
+| **買動漫賣場** | 商品名稱、規格、價格、說明、主圖、庫存 | 在電腦執行 `npm run sync` 後約 1 分鐘（第 8 節） |
 | **`site/store.json`** | 商店上架哪些周邊、周邊的顯示名稱 / 首圖 / 截止時間、運費、付款設定、購買須知 | 存檔後約 2 分鐘（GitHub Action 自動重新產生） |
 | **試算表「訂單」** | 所有訂單（系統寫入），出貨欄位你自己填 | 立刻 |
 
@@ -52,7 +52,7 @@ site/store.json（手動設定）───────────┤
 ## 2. 新增一個周邊
 
 1. **在買動漫上架**，記下商品編號：商品網址 `goods_detail.php?gid=7819462` 的 `7819462`。
-2. **在 `site/store.json` 的 `collections` 加一筆**（怎麼改見 [第 8 節](#8-怎麼修改設定手動同步)）：
+2. **在 `site/store.json` 的 `collections` 加一筆**（怎麼改見 [第 8 節](#8-怎麼修改設定同步買動漫)）：
 
    ```json
    {
@@ -64,7 +64,7 @@ site/store.json（手動設定）───────────┤
    ```
 
 3. 存檔後 GitHub Action 會自動重新產生網站資料，約 2 分鐘後商店頁就會出現新周邊。
-   **如果是剛在買動漫上架的商品**，要等下一次同步（05:00 或 13:00）才抓得到；想馬上上架請手動同步一次（第 8 節）。
+   **如果是剛在買動漫上架的商品**，要先執行一次 `npm run sync`（第 8 節）才抓得到。
 4. 打開商店頁確認商品、價格正確，送一筆單看到綠界付款頁即可（不用付款）。
 
 **周邊可以設定的欄位**（只有 `myacgGid` 必填，其他都可省略）：
@@ -111,7 +111,8 @@ site/store.json（手動設定）───────────┤
 
 - 金額永遠由後端依商品目錄計算，客人竄改網頁上的價格也沒用。
 - 改價只影響之後的新訂單，已成立的訂單金額不變。
-- 買動漫庫存變 0 時，商店頁會自動顯示「已售完」（`store.soldOutWhenMyacgEmpty`）。
+- 每次 `npm run sync` 都會抓買動漫上每個規格的最新庫存；庫存變 0 時，商店頁會自動顯示「已售完」（`store.soldOutWhenMyacgEmpty`）。庫存數字本身不會顯示在商店頁。
+- 商店頁賣出的數量**不會**扣買動漫的庫存（兩邊是分開的通路），請自行在買動漫調整庫存。
 
 ---
 
@@ -250,53 +251,35 @@ site/store.json（手動設定）───────────┤
 
 ---
 
-## 8. 怎麼修改設定、手動同步
+## 8. 怎麼修改設定、同步買動漫
 
 ### 修改 `site/store.json`（在 GitHub 網頁上）
 
 1. 打開 https://github.com/samoyedtopa1120-cmd/topa-store/blob/main/site/store.json
 2. 按右上角鉛筆圖示（Edit）修改，按「Commit changes」。
-3. 到「Actions」分頁會看到「同步商品」開始執行，綠勾代表成功；約 1～2 分鐘後網站更新。
+3. 到「Actions」分頁會看到「重新產生網站資料」開始執行，綠勾代表成功；約 1～2 分鐘後網站更新。
    **紅叉**代表設定有誤（例如少了逗號、訂單前綴不是 4 碼），點進去看錯誤訊息，修正後再存一次即可，網站不會被改壞。
 
 > JSON 格式注意：字串要用雙引號、每筆之間要有逗號、最後一筆後面**不能**有逗號。不確定時可以貼到 https://jsonlint.com 檢查。
 
-### 買動漫每日同步（在 Mac 上跑）
+### 同步買動漫（手動）
 
-買動漫會擋海外機房的連線，GitHub Actions 連不到，所以爬蟲改在台灣網路的 Mac 上跑：
-
-- 每天 **05:00、13:00** 各跑一次：爬買動漫 → 產生網站資料 → 測試 → 有變動才推送到 GitHub。
-- Mac 睡眠時錯過的話，醒來後會補跑一次；關機時錯過則等下一個時間。
-- 使用獨立的資料夾 `~/Library/Application Support/topa-store-sync/`，不會動到平常開發的資料夾。
-- 記錄檔：`~/Library/Logs/topa-store-sync.log`
-- 同步腳本會跟著 GitHub 上的 `tools/mac-sync/sync.sh` 自動更新。
-
-**手動同步一次**（在終端機執行）：
+在買動漫上架新商品、改價、改規格或改說明之後，在電腦的終端機進到專案資料夾執行：
 
 ```bash
-launchctl kickstart gui/$(id -u)/com.topa-store.sync
+npm run sync
 ```
 
-約 3 分鐘完成，結果看記錄檔最後幾行：
+它會依序：取得 GitHub 最新版本 → 爬買動漫（約 3 分鐘）→ 產生網站資料 → 測試 → 有變動就推送到 GitHub，約 1 分鐘後網站更新。買動漫沒有變動時不會推送。
 
-```bash
-tail -5 ~/Library/Logs/topa-store-sync.log
-```
-
-**安裝 / 移除排程**（換電腦時在新電腦執行安裝；需要先 `gh auth login`）：
-
-```bash
-bash tools/mac-sync/install.sh
-```
-
-```bash
-bash tools/mac-sync/install.sh uninstall
-```
+- **為什麼要在自己電腦跑**：買動漫只開放台灣一般網路連線，GitHub、Google 的機器都會被擋，所以沒辦法用 GitHub Actions 自動同步。
+- **只會推送商品資料與圖片**（`docs/data`、`docs/assets/myacg`），你其他還沒 commit 的修改不會被一起送出。
+- 第一次在新電腦使用，要先 `gh auth login` 登入 GitHub，並安裝 Node.js。
 
 ### 在電腦上操作
 
 ```bash
-npm run sync     # 爬買動漫＋產生網站資料
+npm run sync     # 同步買動漫並推送（同上）
 npm run build    # 只依 site/store.json 重新產生
 npm run dev      # 本機預覽 http://localhost:5173/，送單會進綠界「測試」付款頁
 npm test
@@ -307,11 +290,11 @@ npm test
 ## 9. 常見問題
 
 **Q：買動漫改了價格 / 新增規格，商店頁還沒變？**
-每天 05:00、13:00 才同步，而且 Mac 要開著。急的話手動同步一次（第 8 節）；同步失敗看 `~/Library/Logs/topa-store-sync.log`。
+要在電腦執行 `npm run sync` 才會同步（第 8 節）。
 
 **Q：新增了周邊，商店頁沒出現？**
-- 確認 Actions「同步商品」是綠勾（改 store.json 後會自動執行）。
-- 剛在買動漫上架的商品要先同步一次才抓得到（第 8 節手動同步）。
+- 確認 Actions「重新產生網站資料」是綠勾（改 store.json 後會自動執行）。
+- 剛在買動漫上架的商品要先執行 `npm run sync` 才抓得到。
 - `myacgGid` 要填主商品編號（買動漫商品網址的 gid），不是規格編號。
 - 有沒有不小心加了 `"hidden": true`。
 
@@ -351,8 +334,8 @@ tools/
   crawl-myacg.mjs            買動漫爬蟲（遵守 robots.txt，請求間隔 5 秒）
   build-site.mjs             依 store.json ＋ 爬蟲結果產生 data/store.js、data/catalog.json
   dev-server.mjs             本機預覽（真的 gas 程式碼＋假試算表＋綠界測試環境）
-.github/workflows/sync-store.yml   store.json 有修改時重新產生（GitHub 連不到買動漫，不爬蟲）
-tools/mac-sync/                    Mac 每日同步：sync.sh（爬蟲＋產生＋推送）、install.sh（安裝 launchd 排程）
+.github/workflows/build-site.yml   store.json 有修改時重新產生（GitHub 連不到買動漫，不爬蟲）
+tools/sync.sh                      npm run sync：爬蟲＋產生＋測試＋推送
 ```
 
 ## 商品目錄與後端
@@ -407,7 +390,7 @@ tools/mac-sync/                    Mac 每日同步：sync.sh（爬蟲＋產生�
 - Apps Script 回應會先 302 轉址，綠界可能讀不到 `1|OK` 而重送通知。寫入已在第一次完成，重送不影響資料。
 - `ecpayResult` 的自動跳轉頁在 Apps Script 沙盒中執行，若瀏覽器擋下自動跳轉，頁面上有「查看訂單」按鈕。
 - 買動漫改版可能讓爬蟲抓不到資料；此時同步會失敗、不覆蓋舊資料，商店維持前一次的內容。
-- 買動漫擋海外機房 IP，所以爬蟲只能在台灣網路的電腦上跑（目前是 Mac 的 launchd 排程）。
+- 買動漫擋海外 / 雲端機房 IP（GitHub Actions、Google Apps Script 都連不到），所以爬蟲只能在台灣網路的電腦上手動執行。
 - `docs/.nojekyll` 不能刪：GitHub Pages 預設的 Jekyll 會忽略底線開頭的檔案，買動漫的圖片檔名常以 `_` 開頭。
 - 試算表結構有更新時（`SCHEMA_VERSION`），網頁應用程式會在下一次請求時自動補欄位，不會動到既有資料。
 - 逾期標記刻意不用程式建立觸發器，需要定時執行請手動在「觸發條件」新增（第 7 節）。
