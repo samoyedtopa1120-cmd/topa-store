@@ -54,13 +54,13 @@ body.store::before { display: none; }
 /* ---------- 周邊按鈕 ---------- */
 .col-list { display: grid; gap: 12px; }
 .col-card {
-  --tint: #ffe3ec; --accent-c: #e0547f;
+  --tint: #e3f5ea; --accent-c: #2f8a57; /* 販售中：綠色 */
   position: relative; display: flex; align-items: center; gap: 14px; width: 100%; padding: 12px 16px 12px 12px;
   border: 2px solid #fff; border-radius: 22px; background: #fff; color: inherit; font: inherit; text-align: left; cursor: pointer;
   box-shadow: 0 4px 16px #235c8514; transition: transform .2s, box-shadow .2s, border-color .2s;
 }
-.col-card:hover { transform: translateY(-2px); border-color: var(--accent-c); box-shadow: 0 12px 26px -8px #235c8540; }
-.col-card:focus-visible { outline: 3px solid var(--accent-c); outline-offset: 3px; }
+.col-card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 12px 26px -8px #235c8540; }
+.col-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .col-card.picked { border-color: var(--accent); background: var(--accent-soft); }
 .col-card.is-soon { --tint: #dcefff; --accent-c: #287bb9; }
 .col-card.is-closed, .col-card.is-soldout { --tint: #eaf0f4; --accent-c: #6f8796; }
@@ -72,7 +72,9 @@ body.store::before { display: none; }
 .col-meta { display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: center; margin-top: 4px; font-size: .8rem; color: var(--ink-soft); }
 .tag { padding: 1px 9px; border-radius: 999px; background: var(--tint); color: var(--accent-c); font-weight: 800; font-size: .74rem; }
 .col-price { font-weight: 800; color: var(--accent); }
-.col-go { flex: none; display: grid; place-items: center; min-width: 34px; height: 34px; padding: 0 10px; border-radius: 999px; background: var(--tint); color: var(--accent-c); font-weight: 800; font-size: .85rem; }
+/* 選購按鈕：藍色；已截止 / 已售完為灰色 */
+.col-go { flex: none; display: grid; place-items: center; min-width: 34px; height: 34px; padding: 0 12px; border-radius: 999px; background: #dcefff; color: var(--accent); font-weight: 800; font-size: .85rem; }
+.col-card.is-closed .col-go, .col-card.is-soldout .col-go { background: #eaf0f4; color: #6f8796; }
 .col-card.picked .col-go { background: var(--accent); color: #fff; }
 
 /* ---------- 已選商品 ---------- */
@@ -131,6 +133,6 @@ footer a { color: var(--accent); font-weight: 700; text-decoration: none; }
   .blob, .sky { display: none; }
   .avatar-btn, .ring, .sheet[open] { animation: none; }
 }
-.sheet-inner { --tint: #ffe3ec; --accent-c: #e0547f; }
+.sheet-inner { --tint: #e3f5ea; --accent-c: #2f8a57; }
 .sheet-inner.is-soon { --tint: #dcefff; --accent-c: #287bb9; }
 .sheet-inner.is-closed, .sheet-inner.is-soldout { --tint: #eaf0f4; --accent-c: #6f8796; }
