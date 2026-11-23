@@ -92,6 +92,8 @@ for (const c of config.collections || []) {
     products
   };
   col.image = col.images[0] || '';
+  // 周邊按鈕上圓形縮圖用的圖（不填就用圖庫第一張）
+  col.thumbnail = c.thumbnail || col.image;
   collections.push(col);
 
   if (c.legacyCampaign) {

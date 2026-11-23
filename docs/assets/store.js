@@ -62,10 +62,10 @@
       b.type = 'button';
       b.className = 'col-card is-' + st + (n ? ' picked' : '');
       b.innerHTML =
-        '<span class="col-img">' + (c.image ? '<img alt="" loading="lazy">' : '') + '</span>' +
+        '<span class="col-img">' + (c.thumbnail || c.image ? '<img alt="" loading="lazy">' : '') + '</span>' +
         '<span class="col-body"><strong></strong><span class="col-meta"><span class="tag"></span><span class="col-price"></span><span class="col-when"></span></span></span>' +
         '<span class="col-go"></span>';
-      if (c.image) b.querySelector('img').src = imgSrc(c.image);
+      if (c.thumbnail || c.image) b.querySelector('img').src = imgSrc(c.thumbnail || c.image);
       b.querySelector('strong').textContent = c.title;
       b.querySelector('.tag').textContent = tag;
       b.querySelector('.col-price').textContent = priceText(c);

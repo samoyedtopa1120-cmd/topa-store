@@ -83,7 +83,8 @@ window.STORE = {
           "soldOut": false,
           "maxQty": 0
         }
-      ]
+      ],
+      "thumbnail": "2026Birthday/img/key-visual.jpg"
     },
     {
       "id": "g7763595",
@@ -123,7 +124,8 @@ window.STORE = {
           "soldOut": false,
           "maxQty": 0
         }
-      ]
+      ],
+      "thumbnail": "assets/myacg/7763595_1_202611120033306.jpg"
     },
     {
       "id": "g6965939",
@@ -174,7 +176,8 @@ window.STORE = {
           "soldOut": false,
           "maxQty": 0
         }
-      ]
+      ],
+      "thumbnail": "img/duoyu-thumb.jpg"
     },
     {
       "id": "g6805893",
@@ -280,7 +283,8 @@ window.STORE = {
           "soldOut": false,
           "maxQty": 0
         }
-      ]
+      ],
+      "thumbnail": "assets/myacg/_1_202602061257127.jpg"
     },
     {
       "id": "g6436630",
@@ -344,7 +348,8 @@ window.STORE = {
           "soldOut": true,
           "maxQty": 0
         }
-      ]
+      ],
+      "thumbnail": "assets/myacg/_1_202510241909451.jpg"
     },
     {
       "id": "g5979743",
@@ -442,7 +447,8 @@ window.STORE = {
           "soldOut": false,
           "maxQty": 0
         }
-      ]
+      ],
+      "thumbnail": "assets/myacg/_1_202506181912242.jpg"
     },
     {
       "id": "g5903455",
@@ -472,7 +478,8 @@ window.STORE = {
           "soldOut": false,
           "maxQty": 0
         }
-      ]
+      ],
+      "thumbnail": "assets/myacg/5903455_1_202505282131184.jpg"
     }
   ]
 };
